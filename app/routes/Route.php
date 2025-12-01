@@ -61,5 +61,3 @@ class Route {
         return View::render('error', ['msg' => 'Page not found']);
     }
 }
-
-?>

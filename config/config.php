@@ -1,5 +1,5 @@
 <?php
 
-define('BASE', '/ProjetWeb1/public/');
+define('BASE', '/ProjetWeb1/public');
 
 ?>

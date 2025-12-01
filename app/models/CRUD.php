@@ -51,9 +51,6 @@ abstract class CRUD extends \PDO {
 
         $data_keys = array_fill_keys($this->fillable, '');
         $data = array_intersect_key($data, $data_keys);
-
-        // UPDATE client SET id = :id, name = :name, address = :address, zip_code = :zip_code, phone = :phone, email = :email WHERE id = :id
-
         $fieldName = null;
         foreach($data as $key=>$value){
             $fieldName .= "$key = :$key, ";
