@@ -1,6 +1,6 @@
 {% include 'layouts/header.php' %}
 
-<h1>{{ message }}</h1>
-<p>Le MVC fonctionne!</p>
+<h2>Accueil</h2>
+<p>{{ message }}</p>
 
 {% include 'layouts/footer.php' %}
