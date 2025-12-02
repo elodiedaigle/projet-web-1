@@ -20,27 +20,42 @@
         </div>
     {% endif %}
 
-    <form action="{{ base }}/register" method="POST" class="form-auth">
+    <form id="form-register" action="{{ base }}/register" method="POST" class="form-auth">
 
-        <label for="nom">Nom</label>
-        <input type="text" id="nom" name="nom" required>
+        <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" name="prenom" value="{{ old.prenom ?? '' }}" required>
+            <div class="message-erreur"></div>
+        </div>
 
-        <label for="prenom">Prénom</label>
-        <input type="text" id="prenom" name="prenom" required>
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" name="nom" value="{{ old.nom ?? '' }}" required>
+            <div class="message-erreur"></div>
+        </div>
 
-        <label for="courriel">Courriel</label>
-        <input type="email" id="courriel" name="courriel" required>
+        <div class="form-group">
+            <label for="courriel">Courriel</label>
+            <input type="email" id="courriel" name="courriel" value="{{ old.courriel ?? '' }}" required>
+            <div class="message-erreur"></div>
+        </div>
 
-        <label for="mot_de_passe">Mot de passe</label>
-        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+        <div class="form-group">
+            <label for="mot_de_passe">Mot de passe</label>
+            <input type="password" id="mot_de_passe" name="mot_de_passe" required>
+            <div class="message-erreur"></div>
+        </div>
 
-        <label for="mot_de_passe_confirmation">Confirmation du mot de passe</label>
-        <input type="password" id="mot_de_passe_confirmation" name="mot_de_passe_confirmation" required>
+        <div class="form-group">
+            <label for="mot_de_passe_confirmation">Confirmation du mot de passe</label>
+            <input type="password" id="mot_de_passe_confirmation" name="mot_de_passe_confirmation" required>
+            <div class="message-erreur"></div>
+        </div>
 
         <button type="submit" class="btn-primary">Créer mon compte</button>
 
         <p class="auth-link">
-            Déjà inscrit ? <a href="{{ base }}/login">Se connecter</a>
+            Déjà inscrit? <a href="{{ base }}/login">Se connecter</a>
         </p>
 
     </form>
