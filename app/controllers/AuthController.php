@@ -1,6 +1,7 @@
 <?php 
 namespace App\Controllers;
 use App\Providers\View;
+use App\Providers\Validator;
 use App\Models\Utilisateur;
 
 class AuthController {
@@ -13,13 +14,47 @@ class AuthController {
 
     // Traiter le formulaire d'inscription
     public function registerPost($post = []) {
-        $nom = trim($post['nom'] ?? '');
         $prenom = trim($post['prenom'] ?? '');
+        $nom = trim($post['nom'] ?? '');
         $courriel = trim($post['courriel'] ?? '');
-        $motDePasse = trim($post['mot_de_passe'] ?? '');
-        $moteDePasseConfirmation = trim($post['mot_de_passe_confirmation']);
+        $motDePasse = $post['mot_de_passe'] ?? '';
+        $motDePasseConfirmation = $post['mot_de_passe_confirmation'];
 
-        // Logique de validation à ajouter sous peu
+        // Validations
+        $validator = new Validator();
+
+            // Champs requis
+            $validator->field('prenom', $prenom)->required();
+            $validator->field('nom', $nom)->required();
+            $validator->field('courriel', $courriel)->required()->email();
+            $validator->field('mot_de_passe', $motDePasse)->required();
+            $validator->field('mot_de_passe_confirmation', $motDePasseConfirmation)->required()->same('mot_de_passe', $motDePasse);
+
+            // Courriel unique
+            $validator->field('courriel', $courriel)->unique('Utilisateur');
+
+            // En cas d'erreur, retourner au formulaire
+            if (!$validator->isSuccess()) {
+                return View::render(
+                    'auth/register', 
+                    ['erreurs' => $validator->getErrors(), 
+                    'old' => $post]);
+            }
+
+            // Quand tout est validé, hash le mot de passe et insérer
+            $hash = password_hash($motDePasse, PASSWORD_DEFAULT);
+
+            $utilisateur = new Utilisateur();
+
+            $utilisateur->insert([
+                'prenom' => $prenom,
+                'nom' => $nom,
+                'courriel' => $courriel,
+                'password_hash' => $hash
+            ]);
+
+            // Redirection au login
+            return View::redirect('/login');
     }
 
     // Afficher le formulaire de connexion - À faire plus tard
