@@ -13,7 +13,13 @@ class AuthController {
 
     // Traiter le formulaire d'inscription
     public function registerPost($post = []) {
+        $nom = trim($post['nom'] ?? '');
+        $prenom = trim($post['prenom'] ?? '');
+        $courriel = trim($post['courriel'] ?? '');
+        $motDePasse = trim($post['mot_de_passe'] ?? '');
+        $moteDePasseConfirmation = trim($post['mot_de_passe_confirmation']);
 
+        // Logique de validation à ajouter sous peu
     }
 
     // Afficher le formulaire de connexion - À faire plus tard
@@ -29,6 +35,6 @@ class AuthController {
 
     // Déconnexion - À faire plus tard
     public function logout() {
-        
+
     }
 }
