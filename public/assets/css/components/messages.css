@@ -1,0 +1,21 @@
+.message-erreur {
+    color: var(--rouge-accent);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.form-errors {
+    background: #FCECEC;
+    border-left: 4px solid var(--rouge-accent);
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+}
+
+.form-success {
+    background: #E6F5EA;
+    border-left: 4px solid #2d7a46;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+}

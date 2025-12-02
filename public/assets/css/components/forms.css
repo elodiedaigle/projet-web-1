@@ -1,0 +1,38 @@
+.auth-container {
+    max-width: 500px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: var(--blanc);
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--bleu-royal);
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--taupe);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Erreurs JS */
+.form-group.erreur input {
+    border-color: var(--rouge-accent);
+    background: #FCECEC;
+}
+
+.message-erreur {
+    color: var(--rouge-accent);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}

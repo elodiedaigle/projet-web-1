@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title ?? 'Stampee' }}</title>
+    <link rel="stylesheet" href="{{ base }}/assets/css/style.css">
 </head>
 <body>
 

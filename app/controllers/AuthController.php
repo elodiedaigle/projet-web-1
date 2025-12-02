@@ -8,7 +8,6 @@ class AuthController {
 
     // Afficher le formulaire d'inscription
     public function register() {
-
         return View::render('auth/register');
     }
 

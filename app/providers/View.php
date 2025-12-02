@@ -10,6 +10,7 @@ class View
     {
         $loader = new FilesystemLoader(__DIR__ . '/../views');
         $twig = new Environment($loader);
+        $twig->addGlobal('base', BASE);
 
         echo $twig->render($template . '.php', $data);
     }

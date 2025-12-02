@@ -1,0 +1,14 @@
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background: var(--bleu-royal);
+    color: var(--blanc);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: var(--bleu-clair);
+}
