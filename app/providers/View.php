@@ -11,6 +11,7 @@ class View
         $loader = new FilesystemLoader(__DIR__ . '/../views');
         $twig = new Environment($loader);
         $twig->addGlobal('base', BASE);
+        $twig->addGlobal('session', $_SESSION);
 
         echo $twig->render($template . '.php', $data);
     }
