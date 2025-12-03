@@ -20,7 +20,7 @@
         </div>
     {% endif %}
 
-    <form id="form-register" action="{{ base }}/register" method="POST" class="form-auth">
+    <form id="form-register" action="{{ base }}/register" method="POST" class="form-auth" novalidate>
 
         <div class="form-group">
             <label for="prenom">Prénom</label>

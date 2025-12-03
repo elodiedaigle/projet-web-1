@@ -56,15 +56,49 @@ class AuthController {
             return View::redirect('/login');
     }
 
-    // Afficher le formulaire de connexion - À faire plus tard
+    // Afficher le formulaire de connexion
     public function login() {
-
         return View::render('auth/login');
     }
 
-    // Traiter le formulaire de connextion - À faire plus tard
+    // Traiter le formulaire de connexion
     public function loginPost($post = []) {
+        $courriel = trim($post['courriel'] ?? '');
+        $motDePasse = $post['mot_de_passe'] ?? '';
 
+        // Validations
+        $validator = new Validator();
+
+            // Champs requis
+            $validator->field('courriel', $courriel)->required()->email();
+            $validator->field('mot_de_passe', $motDePasse)->required();
+        
+            // En cas d'erreur, retourner au formulaire
+            if (!$validator->isSuccess()) {
+                return View::render(
+                    'auth/login', 
+                    ['erreurs' => $validator->getErrors(), 
+                    'old' => $post]);
+            }
+
+            // Vérifier que l'utilisateur existe
+            $u = new Utilisateur();
+            $user = $u->findByEmail($courriel);
+
+            if (!$user || !password_verify($motDePasse, $user['password_hash'])) {
+                return View::render('auth/login', [
+                    'erreurs' => ['Courriel ou mot de passe invalide.'],
+                    'old' => $post
+                ]);
+            }
+
+            // Quand tout est validé, créer la session
+            $_SESSION ['user_id'] = $user['idutilisateur'];
+            $_SESSION['user_prenom'] = $user['prenom'];
+            $_SESSION['user_nom'] = $user['nom'];
+            $_SESSION['user_courriel'] = $user['courriel'];
+
+            return View::redirect('/');
     }
 
     // Déconnexion - À faire plus tard
