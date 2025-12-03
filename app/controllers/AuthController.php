@@ -101,7 +101,7 @@ class AuthController {
             return View::redirect('/');
     }
 
-    // Déconnexion - À faire plus tard
+    // Déconnexion
     public function logout() {
         session_destroy();
         return View::redirect('/');

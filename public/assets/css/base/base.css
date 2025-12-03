@@ -1,6 +1,53 @@
+/* Base générale */
+
+html, body {
+    height: 100%;
+}
+
+/* Typo globale */
+
 body {
     font-family: "Quicksand", sans-serif;
     background-color: var(--beige);
     color: var(--rouge-fonce);
-    line-height: 1.5;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4,
+.section__title,
+.section__title--hero {
+    font-family: "Merriweather", serif;
+    font-weight: 700;
+    color: var(--rouge-fonce);
+}
+
+/* Images responsives */
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Liens */
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Conteneur général */
+
+.container {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+/* Contenu principal */
+
+.main-content {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    flex: 1;
 }
