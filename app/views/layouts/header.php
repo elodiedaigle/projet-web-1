@@ -11,6 +11,42 @@
 </head>
 <body>
 
-<header>
-    <h1>Stampee</h1>
+<header class="site-header">
+    <div class="container header-inner">
+
+        <!-- Logo -->
+         <a href="{{ base }}/" class="logo">
+            <img src="{{ base }}/assets/img/logo-stampee.png" alt="Logo Stampee">
+         </a>
+
+         <!-- Navigation -->
+          <nav class="nav">
+
+            <ul class="nav-list">
+                <li class="nav-left {% if currentPath == '/' %}active{% endif %}">
+                    <a href="{{ base }}/">Accueil</a>
+                </li>
+
+                {% if not session.user_id %}
+                <li class="nav-right {% if currentPath starts with '/register' %}active{% endif %}">
+                    <a href="{{ base }}/register">Inscription</a>
+                </li>
+
+                <li class="nav-right {% if currentPath starts with '/login' %}active{% endif %}">
+                    <a href="{{ base }}/login">Connexion</a>
+                </li>
+
+                {% else %}
+                <li class="nav-right">
+                    <a href="{{ base }}/logout">Déconnexion</a>
+                </li>
+                {% endif %}
+
+            </ul>
+
+          </nav>
+
+    </div>
 </header>
+
+<main class="main-content">
