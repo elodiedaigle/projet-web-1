@@ -103,6 +103,7 @@ class AuthController {
 
     // Déconnexion - À faire plus tard
     public function logout() {
-
+        session_destroy();
+        return View::redirect('/');
     }
 }

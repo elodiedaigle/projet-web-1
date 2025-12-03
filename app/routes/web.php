@@ -1,13 +1,16 @@
 <?php
 use App\Routes\Route;
 
-// Page d'accueil
+// HomeController
 Route::get('/', 'HomeController@index');
 
-// Page d'inscription
+// Register
 Route::get('/register', 'AuthController@register');
 Route::post('/register', 'AuthController@registerPost');
 
-// Page de login
+// Login
 Route::get('/login', 'AuthController@login');
 Route::post('/login', 'AuthController@loginPost');
+
+// Logout
+Route::get('/logout', 'AuthController@logout');
