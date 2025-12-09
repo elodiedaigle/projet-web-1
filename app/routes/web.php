@@ -17,3 +17,6 @@ Route::get('/logout', 'AuthController@logout');
 
 // Enchere
 Route::get('/encheres/actives', 'EnchereController@actives');
+
+// Fiche
+Route::get('/encheres/fiche', 'EnchereController@fiche');
