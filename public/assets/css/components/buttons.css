@@ -12,3 +12,9 @@
 .btn-primary:hover {
     background: var(--bleu-clair);
 }
+
+.enchere-card__btn {
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+}

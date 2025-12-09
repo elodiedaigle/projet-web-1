@@ -8,7 +8,6 @@ class HomeController
     public function index()
     {
         return View::render('accueil/index', [
-            'message' => "Le MVC fonctionne, YAY!"
         ]);
     }
 }

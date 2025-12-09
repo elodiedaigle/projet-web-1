@@ -50,6 +50,66 @@
   margin-bottom: 0.75rem;
 }
 
+/* Encheres */
+
+.enchere-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+}
+
+/* Zone des filtres — vide jusqu'au sprint 3 */
+.enchere-filters {
+  display : none;
+}
+
+.enchere-content {
+  width: 100%;
+}
+
+/* Grille */
+
+.enchere-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+/* Cartes */
+
+.enchere-card {
+  background: var(--blanc);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cartes images - Placeholder d'ici à la gestion d'images plus tard dans le sprint 2 */
+
+.enchere-card__image {
+  height: 260px;
+  background: var(--taupe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--beige);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.enchere-card__body {
+  padding: 1.5rem;
+}
+
+.enchere-card__title {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+
 /* Responsive */
 
 @media (max-width: 900px) {
@@ -76,4 +136,38 @@
   .section--hero {
     padding-block: 2rem 2rem;
   }
+}
+
+@media (max-width: 900px) {
+    .enchere-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .enchere-filters {
+        order: 2;
+    }
+
+    .enchere-content {
+        order: 1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .enchere-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .enchere-card {
+        padding: 1.2rem;
+    }
+
+    .enchere-card__title {
+        font-size: 1.2rem;
+    }
+
+    .enchere-layout {
+        gap: 1.5rem;
+    }
 }

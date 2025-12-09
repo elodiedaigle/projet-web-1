@@ -11,14 +11,14 @@
     justify-content: space-between;
 }
 
-/* Logo */
+/* Header - Logo */
 
 .logo img {
     height: 60px;
 }
 
 
-/* Navigation container */
+/* Navigation - Général */
 
 .nav {
     display: flex;
@@ -28,7 +28,7 @@
     justify-content: space-between;
 }
 
-/* Navigation principale */
+/* Navigation - Principale (Gauche) */
 
 .nav__left {
     list-style: none;
@@ -38,7 +38,51 @@
     padding: 0;
 }
 
-/* Navigation de register, login, logout */
+/* Navigation - Dropdown */
+
+.nav-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-dropdown__label {
+    color: var(--blanc);
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+.nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bleu-royal);
+    padding: 0.6rem 0;
+    border-radius: 6px;
+    min-width: 180px;
+    list-style: none;
+    z-index: 20;
+}
+
+.nav-dropdown__menu li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--blanc);
+    font-size: 0.95rem;
+}
+
+.nav-dropdown__menu li a:hover {
+    background: var(--bleu-clair);
+}
+
+.nav-dropdown:hover .nav-dropdown__menu {
+    display: block;
+}
+
+
+/* Navigation - Auth (Droite) */
 
 .nav__right {
     list-style: none;
@@ -47,8 +91,6 @@
     margin: 0;
     padding: 0;
 }
-
-/* Liens */
 
 .nav__left a,
 .nav__right a {
@@ -64,14 +106,7 @@
     color: var(--taupe);
 }
 
-/* Lien actif */
-
-.active > a {
-    border-bottom: 3px solid var(--taupe);
-    padding-bottom: 4px;
-}
-
-/* Navigation mobile */
+/* Navigation - Mobile */
 
 .burger {
     display: none;
@@ -94,7 +129,29 @@
     display: none;
 }
 
-/* Responsive tablette */
+.nav-section-title {
+    display: block;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+
+    color: var(--taupe);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    cursor: default;
+    opacity: 0.9;
+}
+
+.nav-subitem {
+    padding-left: 1.2rem;
+    font-size: 1rem;
+    display: block;
+}
+
+
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
 

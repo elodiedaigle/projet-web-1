@@ -1,8 +1,12 @@
+/* Message - Conteneur */
+
 .message-erreur {
     color: var(--rouge-accent);
     font-size: 0.85rem;
     margin-top: 4px;
 }
+
+/* Message - Indicateur visuel d'erreur */
 
 .form-errors {
     background: #FCECEC;
@@ -11,6 +15,7 @@
     margin-bottom: 1.5rem;
     border-radius: 5px;
 }
+/* Message - Indicateur visuel de succès */
 
 .form-success {
     background: #E6F5EA;
