@@ -14,3 +14,6 @@ Route::post('/login', 'AuthController@loginPost');
 
 // Logout
 Route::get('/logout', 'AuthController@logout');
+
+// Enchere
+Route::get('/encheres/actives', 'EnchereController@actives');

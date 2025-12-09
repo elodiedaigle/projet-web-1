@@ -26,6 +26,17 @@
                 <li class="{% if currentPath == '/' %}active{% endif %}">
                     <a href="{{ base }}/">Accueil</a>
                 </li>
+
+                <li class="nav-dropdown {% if currentPath starts with '/encheres' %}active{% endif %}">
+                    
+                    <span class="nav-dropdown__label">Enchères ▾</span>
+
+                    <ul class="nav-dropdown__menu">
+                        <li><a href="{{ base }}/encheres/actives">Enchères actives</a></li>
+                        <li><a href="{{ base }}/encheres/archives">Enchères archivées</a></li>
+                    </ul>
+                </li>
+
             </ul>
 
             <ul class="nav__right">
@@ -56,6 +67,11 @@
 
             <nav class="nav-mobile">
                 <a href="{{ base }}/">Accueil</a>
+
+                <span class="nav-section-title">Enchères</span>
+                <a href="{{ base }}/encheres/actives" class="nav-subitem">• Actives</a>
+                <a href="{{ base }}/encheres/archives" class="nav-subitem">• Archivées</a>
+
                 {% if not session.user_id %}
                     <a href="{{ base }}/register">Devenir membre</a>
                     <a href="{{ base }}/login">Connexion</a>
@@ -63,6 +79,7 @@
                     <a href="{{ base }}/logout">Déconnexion</a>
                 {% endif %}
             </nav>
+
 
     </div>
 </header>

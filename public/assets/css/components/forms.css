@@ -1,3 +1,5 @@
+/* Fomulaire - Conteneur */
+
 .auth-container {
     max-width: 500px;
     margin: 3rem auto;
@@ -5,6 +7,8 @@
     background: var(--blanc);
     border-radius: 8px;
 }
+
+/* Fomulaire - Groupe de champs */
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -25,6 +29,8 @@
     font-size: 1rem;
 }
 
+/* Fomulaire - Liens */
+
 .auth-link {
     margin-top: 1.2rem;
     font-size: 1rem;
@@ -40,7 +46,8 @@
     opacity: 0.8;
 }
 
-/* Erreurs JS */
+/* Formulaire - Erreurs JS */
+
 .form-group.erreur input {
     border-color: var(--rouge-accent);
     background: #FCECEC;
