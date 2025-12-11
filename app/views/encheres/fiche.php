@@ -5,18 +5,46 @@
 
         <!-- Boîte de gauche : Titre, images, info, statut -->
         <div class="fiche-box fiche-left">
+            <h1 class="fiche-title">{{ enchere.timbre_nom }}</h1>
 
             <div class="fiche-images">
-                <img 
-                    src="{{ images[0].url is defined ? base ~ '/img/' ~ images[0].url : base ~ '/assets/img/placeholder-timbre.jpg' }}"
-                    alt="Image du timbre {{ enchere.timbre_nom }}"
-                    class="fiche-image"
-                />
+
+                {% if imagePrincipale is defined and imagePrincipale %}
+                    <img 
+                        id="fiche-image-principale"
+                        src="{{ base }}/img/{{ imagePrincipale }}"
+                        alt="Image du timbre {{ enchere.timbre_nom }}"
+                        class="fiche-image"
+                    />
+                {% endif %}
+
+                {# Galerie des miniatures : on commence par l'image principale #}
+                <div class="fiche-thumbs">
+
+                    {% if imagePrincipale %}
+                        <img 
+                            src="{{ base }}/img/{{ imagePrincipale }}"
+                            data-full="{{ base }}/img/{{ imagePrincipale }}"
+                            alt="Image principale du timbre"
+                            class="fiche-thumb"
+                        />
+                    {% endif %}
+
+                    {% if imagesSecondaires is defined and imagesSecondaires|length > 0 %}
+                        {% for img in imagesSecondaires %}
+                            <img 
+                                src="{{ base }}/img/{{ img }}"
+                                data-full="{{ base }}/img/{{ img }}"
+                                alt="Image secondaire du timbre {{ enchere.timbre_nom }}"
+                                class="fiche-thumb"
+                            />
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
             </div>
 
             <div class="fiche-infos-section">
-                <h1 class="fiche-title">{{ enchere.timbre_nom }}</h1>
-
                 <ul class="fiche-infos">
                     <li><strong>Année :</strong> {{ enchere.annee_publication }}</li>
                     <li><strong>Pays :</strong> {{ enchere.pays_nom }}</li>

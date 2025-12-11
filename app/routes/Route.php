@@ -2,7 +2,6 @@
 
 namespace App\Routes;
 use App\Providers\View;
-
 class Route {
 
     private static $routes = [];
@@ -15,49 +14,45 @@ class Route {
         self::$routes[] = ['url' => $url, 'controller' => $controller, 'method' => 'POST'];
     }
 
-    public static function dispatch(){
+    public static function dispatch() {
 
-        $url = $_SERVER['REQUEST_URI'];
-        $urlSegments = explode('?', $url);
-        $urlPath = $urlSegments[0];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $base = BASE;
+
+        if ($base !== '/' && str_starts_with($uri, $base)) {
+            $uri = substr($uri, strlen($base));
+        }
+
+        $uri = '/' . trim($uri, '/');
         $method = $_SERVER['REQUEST_METHOD'];
 
-        foreach(self::$routes as $route){
+        foreach (self::$routes as $route) {
 
-            if (BASE.$route['url'] == $urlPath && $route['method'] == $method) {
+            if ($route['url'] === $uri && $route['method'] === $method) {
 
-                $controllerSegments = explode('@', $route['controller']);
-                $controllerName = 'App\\Controllers\\'.$controllerSegments[0];
-                $methodName = $controllerSegments[1];
+                [$controllerName, $methodName] = explode('@', $route['controller']);
+                $controllerClass = 'App\\Controllers\\' . $controllerName;
 
-                $controllerInstance = new $controllerName();
+                $controllerInstance = new $controllerClass();
 
                 if (!method_exists($controllerInstance, $methodName)) {
                     http_response_code(404);
-                    return View::render('error', ['msg' => 'Page not found']);
+                    return View::render('error', ['msg' => 'Méthode introuvable']);
                 }
 
-                if($method == 'GET'){
-                    if(isset($urlSegments[1])){
-                        parse_str($urlSegments[1], $queryParams);
-                        $controllerInstance->$methodName($queryParams);
-                    }else{
-                        $controllerInstance->$methodName();
-                    }
-                } elseif ($method == 'POST'){
-                    if(isset($urlSegments[1])){
-                        parse_str($urlSegments[1], $queryParams);
-                        $controllerInstance->$methodName($_POST, $queryParams);
-                    } else {
-                        $controllerInstance->$methodName($_POST);
-                    }
+                $queryParams = $_GET ?? [];
+
+                if ($method === 'GET') {
+                    return $controllerInstance->$methodName($queryParams);
                 }
 
-                return;
+                if ($method === 'POST') {
+                    return $controllerInstance->$methodName($_POST, $_FILES);
+                }
             }
         }
 
         http_response_code(404);
-        return View::render('error', ['msg' => 'Page not found']);
+        return View::render('error', ['msg' => 'Page introuvable']);
     }
 }

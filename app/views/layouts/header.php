@@ -7,7 +7,9 @@
     
     <script src="{{ base }}/js/validation-register.js" defer></script>
     <script src="{{ base }}/js/validation-login.js" defer></script>
+    <script src="{{ base }}/js/validation-enchere-create.js" defer></script>
     <script src="{{ base }}/js/menu-burger.js" defer></script>
+    <script src="{{ base }}/js/fiche-images.js" defer></script>
 </head>
 <body>
 
@@ -23,33 +25,41 @@
           <nav class="nav">
 
             <ul class="nav__left">
-                <li class="{% if currentPath == '/' %}active{% endif %}">
+                <li>
                     <a href="{{ base }}/">Accueil</a>
                 </li>
 
-                <li class="nav-dropdown {% if currentPath starts with '/encheres' %}active{% endif %}">
+                <li class="nav-dropdown">
                     
                     <span class="nav-dropdown__label">Enchères ▾</span>
 
                     <ul class="nav-dropdown__menu">
-                        <li><a href="{{ base }}/encheres/actives">Enchères actives</a></li>
-                        <li><a href="{{ base }}/encheres/archives">Enchères archivées</a></li>
+                        <li>
+                            <a href="{{ base }}/encheres/actives">Enchères actives</a>
+                        </li>
+
+                        <li>
+                            <a href="{{ base }}/encheres/archives">Enchères archivées</a>
+                        </li>
                     </ul>
                 </li>
-
             </ul>
 
             <ul class="nav__right">
                 {% if not session.user_id %}
-                <li class="{% if currentPath starts with '/register' %}active{% endif %}">
+                <li>
                     <a href="{{ base }}/register">Devenir membre</a>
                 </li>
 
-                <li class="{% if currentPath starts with '/login' %}active{% endif %}">
+                <li>
                     <a href="{{ base }}/login">Connexion</a>
                 </li>
 
                 {% else %}
+                <li>
+                    <a href="{{ base }}/encheres/create">Créer une enchère</a>
+                </li>
+
                 <li>
                     <a href="{{ base }}/logout">Déconnexion</a>
                 </li>
@@ -76,11 +86,10 @@
                     <a href="{{ base }}/register">Devenir membre</a>
                     <a href="{{ base }}/login">Connexion</a>
                 {% else %}
+                    <a href="{{ base }}/encheres/create" class="nav-subitem">• Créer une enchère</a>
                     <a href="{{ base }}/logout">Déconnexion</a>
                 {% endif %}
             </nav>
-
-
     </div>
 </header>
 

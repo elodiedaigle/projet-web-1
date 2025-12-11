@@ -53,9 +53,7 @@
 /* Encheres */
 
 .enchere-layout {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 2rem;
+    display: block;
 }
 
 /* Zone des filtres — vide jusqu'au sprint 3 */
@@ -87,29 +85,22 @@
   flex-direction: column;
 }
 
-/* Cartes images - Placeholder d'ici à la gestion d'images plus tard dans le sprint 2 */
-
 .enchere-card__image {
+  width: 100%;
   height: 260px;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
   background: var(--taupe);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--beige);
-  font-size: 1rem;
-  font-style: italic;
 }
 
-.fiche-image__placeholder {
+.enchere-card__image img {
   width: 100%;
-  height: 350px;
-  background: var(--taupe);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  color: var(--beige);
-  font-style: italic;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .enchere-card__body {
@@ -145,19 +136,35 @@
   margin-bottom: 1.5rem;
 }
 
-.fiche-image,
-.fiche-image__placeholder {
+.fiche-image {
   width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  background: var(--taupe);
   height: 350px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: transparent;
+  padding: 8px;
+}
+
+
+.fiche-thumbs {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--beige);
-  font-style: italic;
+  gap: 10px;
+  margin-top: 15px;
+  margin-bottom: 2.5rem;
+}
+
+.fiche-thumb {
+  width: 80px;
+  height: 80px;
   object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.fiche-thumb:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
 }
 
 .fiche-infos {
@@ -179,10 +186,10 @@
 }
 
 .fiche-status {
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--taupe);
-    font-size: 0.95rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--taupe);
+  font-size: 0.95rem;
 }
 
 /* Fiche détail - Boite droite */
@@ -192,24 +199,24 @@
 }
 
 .fiche-badge {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: var(--bleu-royal);
-    color: white;
-    padding: .4rem 1rem;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: .9rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: var(--bleu-royal);
+  color: white;
+  padding: .4rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: .9rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
 }
 
 .fiche-badge--active {
-    background: #c8352d;
+  background: #c8352d;
 }
 
 .fiche-badge--closed {
-    background: #555;
+  background: #555;
 }
 
 
