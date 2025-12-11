@@ -7,14 +7,24 @@ abstract class CRUD extends \PDO {
         parent::__construct('mysql:host=127.0.0.1; dbname=stampee; port=3306; charset=utf8', 'root', 'admin1234!');
     }
 
-    final public function select( $field = null, $order = 'ASC'){
-        if($field == null){
-            $field = $this->primaryKey;
-        }
-        $sql = "SELECT * FROM $this->table ORDER BY $field $order";
+    final public function select($field = null, $order = 'ASC')
+{
+    // Si aucune clé primaire n'est définie, faire un SELECT normal
+    if (!$this->primaryKey) {
+        $sql = "SELECT * FROM $this->table";
         $stmt = $this->query($sql);
         return $stmt->fetchAll();
     }
+
+    // Sinon, utiliser la clé primaire comme champ ORDER BY
+    if ($field === null) {
+        $field = $this->primaryKey;
+    }
+
+    $sql = "SELECT * FROM $this->table ORDER BY $field $order";
+    $stmt = $this->query($sql);
+    return $stmt->fetchAll();
+}
 
     final public function selectId($value){
         $sql = "SELECT * FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";

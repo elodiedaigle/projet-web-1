@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\Enchere;
 use App\Models\Timbre;
 use App\Models\TimbreImage;
+use App\Models\Couleur;
 use App\Models\TimbreCouleur;
 use App\Models\TimbreCondition;
 use App\Models\TimbrePays;
@@ -61,7 +62,7 @@ class EnchereController
 
     // Afficher le formulaire de création d'enchère
     public function create() {
-        $couleurModel = new TimbreCouleur();
+        $couleurModel = new Couleur();
         $couleurs = $couleurModel->select();
         $conditionModel = new TimbreCondition();
         $conditions = $conditionModel->select();
@@ -96,7 +97,7 @@ class EnchereController
         // En cas d'erreur, retourner au formulaire
         if (!$validator->isSuccess()) {
 
-            $couleurModel = new TimbreCouleur();
+            $couleurModel = new Couleur();
             $couleurs = $couleurModel->select();
 
             $conditionModel = new TimbreCondition();
@@ -149,7 +150,7 @@ class EnchereController
 
         // puis uploader l'image
         $filenamePrincipale = uniqid('img_') . '.jpg';
-        move_uploaded_file(
+            move_uploaded_file(
             $files['image_principale']['tmp_name'],
             __DIR__ . '/../../public/img/' . $filenamePrincipale
         );

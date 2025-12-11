@@ -16,10 +16,11 @@
                     {% for e in encheres %}
                         <article class="enchere-card">
 
-                    {% if e.image_principale %}
-                        <div class="enchere-card__image">
-                            <img src="{{ base }}/img/{{ e.image_principale }}" alt="{{ e.timbre_nom }}">
-                        </div>
+                        {% if e.image_principale %}
+                            <div class="enchere-card__image">
+                                <img src="{{ base }}/img/{{ e.image_principale }}" alt="{{ e.timbre_nom }}">
+                            </div>
+                        {% endif %}
 
                         <div class="enchere-card__body">
                             <h2 class="enchere-card__title">{{ e.timbre_nom }}</h2>
@@ -34,7 +35,8 @@
                         </div>
 
                         </article>
-                    {% endfor %}
+            {% endfor %}
+
 
                 </div>
             {% else %}
