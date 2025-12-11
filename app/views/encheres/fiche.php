@@ -56,8 +56,8 @@
             </div>
 
             <div class="fiche-status">
-                <p><strong>Ouverture :</strong> {{ enchere.date_ouverture }}</p>
-                <p><strong>Fermeture :</strong> {{ enchere.date_fermeture }}</p>
+                <p><strong>Ouverture :</strong> {{ enchere.date_ouverture | date("d/m/Y") }}</p>
+                <p><strong>Fermeture :</strong> {{ enchere.date_fermeture | date("d/m/Y") }}</p>
             </div>
 
         </div>
@@ -78,12 +78,53 @@
             </p>
 
             <p class="fiche-status-small">
-                Se termine le {{ enchere.date_fermeture }}
+                Se termine le {{ enchere.date_fermeture | date("d/m/Y \\à H:i") }}
             </p>
 
-            <p class="fiche-form-placeholder">
-                Formulaire de mise bientôt disponible.
+            {% if erreur_offre is defined %}
+            <div class="form-errors">
+                 <p>{{ erreur_offre }}</p>
+             </div>
+            {% endif %}
+
+            {% if not session.user_id %}
+            <p class="fiche-login-msg">
+                <a href="{{ base }}/login">Connectez-vous</a> pour faire une offre.
             </p>
+
+            {% elseif enchere.est_active %}
+            <form action="{{ base }}/encheres/offre" method="POST" class="form-auth" novalidate>
+                <input type="hidden" name="enchere_id" value="{{ enchere.idenchere }}">
+
+                <div class="form-group">
+                    <label for="montant">Votre offre</label>
+                    <input type="number" step="0.01" name="montant" id="montant" placeholder="Minimum {{ prixMin }}$">
+                    <div class="message-erreur"></div>
+                </div>
+
+                <button type="submit" class="btn-primary">Soumettre l'offre</button>
+            </form>
+
+            {% else %}
+            <p class="fiche-form-placeholder">Cette enchère est terminée.</p>
+            {% endif %}
+
+            <h3 class="section-title">Historique des offres</h3>
+
+            {% if offres is not empty %}
+            <ul class="liste-offres">
+                {% for o in offres %}
+                    <li class="offre-item">
+                        <div class="offre-header">
+                            <span class="offre-nom">{{ o.prenom }} {{ o.nom }}</span>
+                            <span class="offre-montant">{{ o.montant_offert }}$</span>
+                        </div>
+                        <div class="offre-date">{{ o.date_offre }}</div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>Aucune offre pour le moment.</p>
+            {% endif %}
 
         </div>
 

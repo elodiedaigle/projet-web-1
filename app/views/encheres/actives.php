@@ -26,8 +26,8 @@
                             <h2 class="enchere-card__title">{{ e.timbre_nom }}</h2>
 
                             <p><strong>Prix plancher :</strong> {{ e.prix_plancher }}$</p>
-                            <p><strong>Ouverture :</strong> {{ e.date_ouverture }}</p>
-                            <p><strong>Fermeture :</strong> {{ e.date_fermeture }}</p>
+                            <p><strong>Ouverture :</strong> {{ e.date_ouverture | date("d/m/Y") }}</p>
+                            <p><strong>Fermeture :</strong> {{ e.date_fermeture | date("d/m/Y") }}</p>
 
                             <a href="{{ base }}/encheres/fiche?id={{ e.idenchere }}" class="btn-primary enchere-card__btn">
                                 Voir détails

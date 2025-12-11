@@ -8,6 +8,7 @@ use App\Models\Couleur;
 use App\Models\TimbreCouleur;
 use App\Models\TimbreCondition;
 use App\Models\TimbrePays;
+use App\Models\Offre;
 use App\Providers\View;
 use App\Providers\Validator;
 
@@ -53,10 +54,19 @@ class EnchereController
             }
         }
 
+        // Charger les offres
+        $offreModel = new Offre();
+        $offres = $offreModel->getByEnchere($id);
+        $maxOffer = $offreModel->getHighestBid($id);
+        $prixMin = max($enchere['prix_plancher'], $maxOffer ?: 0) + 1;
+
+
         return View::render('encheres/fiche', [
             'enchere' => $enchere,
             'imagePrincipale' => $imagePrincipale,
-            'imagesSecondaires' => $imagesSecondaires
+            'imagesSecondaires' => $imagesSecondaires,
+            'offres' => $offres,
+            'prixMin' => $prixMin
         ]);
     }
 
@@ -201,4 +211,74 @@ class EnchereController
         return View::redirect('/encheres/fiche?id=' . $enchereId);
     }
 
+    public function offrePost($post = []){
+        if (!isset($_SESSION['user_id'])) {
+            return View::redirect('/login');
+        }
+
+        $enchereId = (int)($post['enchere_id'] ?? 0);
+        $montant   = (float)($post['montant'] ?? 0);
+
+        // Charger l'enchère
+        $enchereModel = new Enchere();
+        $enchere = $enchereModel->findFull($enchereId);
+
+        if (!$enchere) {
+            return View::redirect('/encheres/actives');
+        }
+
+        // Charger les images
+        $imgModel = new TimbreImage();
+        $images = $imgModel->getImages($enchere['idtimbre']);
+
+        $imagePrincipale = null;
+        $imagesSecondaires = [];
+
+        foreach ($images as $img) {
+            if ($img['type_image'] === 'principale') {
+                $imagePrincipale = $img['url'];
+            } else {
+                $imagesSecondaires[] = $img['url'];
+            }
+        }
+
+        // Charger offres
+        $offreModel = new Offre();
+        $offres = $offreModel->getByEnchere($enchereId);
+
+        // Validations
+        if ($montant <= 0) {
+            return View::render('encheres/fiche', [
+                'enchere' => $enchere,
+                'imagePrincipale' => $imagePrincipale,
+                'imagesSecondaires' => $imagesSecondaires,
+                'offres' => $offres,
+                'erreur_offre' => "Veuillez entrer un montant valide."
+            ]);
+        }
+
+        // Vérifier la meilleure offre
+        $maxOffer = $offreModel->getHighestBid($enchereId);
+        $prixMin = max($enchere['prix_plancher'], $maxOffer ?: 0);
+
+        if ($montant <= $prixMin) {
+            return View::render('encheres/fiche', [
+                'enchere' => $enchere,
+                'imagePrincipale' => $imagePrincipale,
+                'imagesSecondaires' => $imagesSecondaires,
+                'offres' => $offres,
+                'erreur_offre' => "L'offre doit être supérieure à {$prixMin}$"
+            ]);
+        }
+
+        // Quand tout est validé, insérer
+        $offreModel->insert([
+            'montant_offert' => $montant,
+            'date_offre' => date('Y-m-d H:i:s'),
+            'utilisateur_idutilisateur' => $_SESSION['user_id'],
+            'enchere_idenchere' => $enchereId
+        ]);
+
+        return View::redirect('/encheres/fiche?id=' . $enchereId);
     }
+}

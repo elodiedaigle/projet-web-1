@@ -24,3 +24,6 @@ Route::get('/encheres/fiche', 'EnchereController@fiche');
 // Création enchères
 Route::get('/encheres/create', 'EnchereController@create');
 Route::post('/encheres/create', 'EnchereController@createPost');
+
+// Offre
+Route::post('/encheres/offre', 'EnchereController@offrePost');

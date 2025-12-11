@@ -90,7 +90,6 @@
     transform: scale(1.25);
 }
 
-
 /* Fomulaire - Liens */
 
 .auth-link {
@@ -121,3 +120,13 @@
     margin-top: 4px;
 }
 
+/* Fomulaire - Offre */
+
+.fiche-right .form-group {
+    margin-top: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.fiche-right .btn-primary {
+    margin-top: 0.2rem;
+}

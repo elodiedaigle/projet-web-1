@@ -195,7 +195,7 @@
 /* Fiche détail - Boite droite */
 
 .fiche-right {
-    position: relative;
+  position: relative;
 }
 
 .fiche-badge {
@@ -219,6 +219,49 @@
   background: #555;
 }
 
+/* Fiche détail - Formulaire quand pas login */
+
+.fiche-login-msg {
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: var(--rouge-accent);
+}
+
+.fiche-login-msg a {
+  color: var(--bleu-royal);
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Fiche détail - Liste des offres */
+
+.liste-offres {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.offre-item {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--taupe);
+}
+
+.offre-item:last-child {
+  border-bottom: none;
+}
+
+.offre-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  color: var(--rouge-fonce);
+}
+
+.offre-date {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+}
 
 /* Responsive */
 
@@ -253,7 +296,11 @@
   }
 
   .fiche-right {
-    order: -1;
+    order: 2;
+  }
+
+  .fiche-left {
+    order: 1;
   }
 }
 
