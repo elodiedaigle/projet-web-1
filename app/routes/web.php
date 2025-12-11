@@ -15,8 +15,12 @@ Route::post('/login', 'AuthController@loginPost');
 // Logout
 Route::get('/logout', 'AuthController@logout');
 
-// Enchere
+// Portails encheres
 Route::get('/encheres/actives', 'EnchereController@actives');
 
 // Fiche
 Route::get('/encheres/fiche', 'EnchereController@fiche');
+
+// Création enchères
+Route::get('/encheres/create', 'EnchereController@create');
+Route::post('/encheres/create', 'EnchereController@createPost');

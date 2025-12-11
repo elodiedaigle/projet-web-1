@@ -16,19 +16,22 @@
                     {% for e in encheres %}
                         <article class="enchere-card">
 
-                            {# Image à ajouter plus tard dans le sprint 2 #}
+                    {% if e.image_principale %}
+                        <div class="enchere-card__image">
+                            <img src="{{ base }}/img/{{ e.image_principale }}" alt="{{ e.timbre_nom }}">
+                        </div>
 
-                            <div class="enchere-card__body">
-                                <h2 class="enchere-card__title">{{ e.timbre_nom }}</h2>
+                        <div class="enchere-card__body">
+                            <h2 class="enchere-card__title">{{ e.timbre_nom }}</h2>
 
-                                <p><strong>Prix plancher :</strong> {{ e.prix_plancher }}$</p>
-                                <p><strong>Ouverture :</strong> {{ e.date_ouverture }}</p>
-                                <p><strong>Fermeture :</strong> {{ e.date_fermeture }}</p>
+                            <p><strong>Prix plancher :</strong> {{ e.prix_plancher }}$</p>
+                            <p><strong>Ouverture :</strong> {{ e.date_ouverture }}</p>
+                            <p><strong>Fermeture :</strong> {{ e.date_fermeture }}</p>
 
-                                <a href="{{ base }}/encheres/fiche?id={{ e.idenchere }}" class="btn-primary enchere-card__btn">
-                                    Voir détails
-                                </a>
-                            </div>
+                            <a href="{{ base }}/encheres/fiche?id={{ e.idenchere }}" class="btn-primary enchere-card__btn">
+                                Voir détails
+                            </a>
+                        </div>
 
                         </article>
                     {% endfor %}

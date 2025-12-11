@@ -15,13 +15,21 @@ class Enchere extends CRUD {
 
     public function getActives() {
         $sql = "SELECT 
-                e.idenchere,
-                e.date_ouverture,
-                e.date_fermeture,
-                e.prix_plancher,
-                t.nom AS timbre_nom
+                    e.idenchere,
+                    e.date_ouverture,
+                    e.date_fermeture,
+                    e.prix_plancher,
+                    t.nom AS timbre_nom,
+                    i.url AS image_principale
+
                 FROM enchere e
-                INNER JOIN timbre t ON t.idtimbre = e.timbre_idtimbre
+                INNER JOIN timbre t 
+                    ON t.idtimbre = e.timbre_idtimbre
+
+                LEFT JOIN timbre_image i 
+                    ON i.timbre_idtimbre = t.idtimbre
+                    AND i.type_image = 'principale'
+
                 WHERE e.date_fermeture > NOW()
                 ORDER BY e.date_fermeture ASC";
 
@@ -68,7 +76,7 @@ class Enchere extends CRUD {
 
 
     public function getImages($timbreId) {
-        $sql = "SELECT url type_image 
+        $sql = "SELECT url, type_image 
                 FROM timbre_image 
                 WHERE timbre_idtimbre = ?";
 
