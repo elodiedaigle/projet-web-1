@@ -14,18 +14,77 @@ use App\Providers\Validator;
 
 class EnchereController
 {
-    // Afficher les enchères actives
-    public function actives(){
-        $encheres = (new Enchere())->getActives();
+    /* 
+    ==============================================
+    ACTIVES : Liste et filtre des enchères actives
+    ==============================================
+    */
+
+    public function actives($query = []){
+        $enchereModel = new Enchere();
+
+        // Récupérer les filtres activés
+        $filtres = [
+            'pays' => $query['pays'] ?? null,
+            'annee'=> $query['annee'] ?? null,
+            'condition' => $query['condition'] ?? null,
+            'certifie' => $query['certifie']  ?? null,
+            'prix_min' => $query['prix_min']  ?? null,
+            'prix_max' => $query['prix_max']  ?? null
+        ];
+
+        // Résultats
+        $encheres = $enchereModel->getActivesFiltres($filtres);
+
+        // Charger les conditions
+        $conditionModel = new TimbreCondition();
+        $conditions = $conditionModel->select();
 
         return View::render('encheres/actives', [
-            'encheres' => $encheres
+            'encheres' => $encheres,
+            'conditions'=> $conditions
         ]);
     }
 
-    // Afficher les informations de la fiche 
-    public function fiche($query = [])
-{
+    /* 
+    ==================================================
+    ARCHIVEES : Liste et filtre des enchères archivées
+    ==================================================
+    */
+
+    public function archivees($query = []){
+        $enchereModel = new Enchere();
+
+        // Récupérer les filtres activés
+        $filtres = [
+            'pays' => $query['pays'] ?? null,
+            'annee' => $query['annee'] ?? null,
+            'condition' => $query['condition'] ?? null,
+            'certifie' => $query['certifie']  ?? null,
+            'prix_min' => $query['prix_min']  ?? null,
+            'prix_max' => $query['prix_max']  ?? null
+        ];
+
+        // Résultats
+        $encheres = $enchereModel->getArchiveesFiltres($filtres);
+
+        // Charger les conditions
+        $conditionModel = new TimbreCondition();
+        $conditions = $conditionModel->select();
+
+        return View::render('encheres/archivees', [
+            'encheres'   => $encheres,
+            'conditions' => $conditions
+        ]);
+    }
+
+    /* 
+    ===========================================
+    FICHES : Afficher les détails d'une enchère
+    ===========================================
+    */
+
+    public function fiche($query = []){
         if (!isset($query['id']) || !ctype_digit($query['id'])) {
             return View::redirect('/encheres/actives');
         }
@@ -70,7 +129,12 @@ class EnchereController
         ]);
     }
 
-    // Afficher le formulaire de création d'enchère
+    /* 
+    =====================================================
+    CREATE : Afficher le formulaire de création d'enchère
+    =====================================================
+    */
+
     public function create() {
         $couleurModel = new Couleur();
         $couleurs = $couleurModel->select();
@@ -83,7 +147,12 @@ class EnchereController
         ]);
     }
 
-    // Traiter le formulaire de création d'enchères
+    /* 
+    =========================================================
+    CREATE POST : Gestion du formulaire de création d'enchère
+    =========================================================
+    */
+
     public function createPost($post = [], $files = []) {
 
         // Validations
@@ -128,6 +197,7 @@ class EnchereController
         $paysModel = new TimbrePays();
         $paysExistant = $paysModel->findByNom($paysNettoye);
 
+        // Nettoyer le nom du pays et vérifier s’il existe déjà
         if ($paysExistant) {
             $idPays = $paysExistant['idPays'];
         } else {
@@ -146,7 +216,7 @@ class EnchereController
             'timbre_condition_idTimbreCondition' => $post['condition']
         ]);
 
-        // ajouter les couleurs associées
+        // Ajouter les couleurs associées
         if (!empty($post['couleurs']) && is_array($post['couleurs'])) {
             $timbreCouleurModel = new TimbreCouleur();
 
@@ -158,7 +228,7 @@ class EnchereController
                 }
             }
 
-        // puis uploader l'image
+        // Puis uploader l'image
         $filenamePrincipale = uniqid('img_') . '.jpg';
             move_uploaded_file(
             $files['image_principale']['tmp_name'],
@@ -172,7 +242,7 @@ class EnchereController
             'timbre_idtimbre' => $timbreId
         ]);   
 
-        // et les images secondaires s'il y a
+        // Et les images secondaires s'il y a
         if (isset($files['images_secondaires']) && is_array($files['images_secondaires']['name'])) {
 
             foreach ($files['images_secondaires']['name'] as $index => $name) {
@@ -196,7 +266,7 @@ class EnchereController
             }   
         }
 
-        // et créer l'enchère
+        // Finalement, créer l'enchère
         $enchereModel = new Enchere();
         $enchereId = $enchereModel->insert([
             'date_ouverture' => $post['date_ouverture'],
@@ -207,9 +277,15 @@ class EnchereController
             'utilisateur_idutilisateur' => $_SESSION['user_id'] ?? 1
         ]);
 
-        // Redirection à la fiche créée
+        // Rediriger à la fiche créée
         return View::redirect('/encheres/fiche?id=' . $enchereId);
     }
+
+    /* 
+    ==========================================
+    OFFRE POST : Gestion du formulaire d'offres
+    ==========================================
+    */
 
     public function offrePost($post = []){
         if (!isset($_SESSION['user_id'])) {
@@ -242,7 +318,7 @@ class EnchereController
             }
         }
 
-        // Charger offres
+        // Charger les offres
         $offreModel = new Offre();
         $offres = $offreModel->getByEnchere($enchereId);
 

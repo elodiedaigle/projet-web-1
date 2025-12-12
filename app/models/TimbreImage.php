@@ -10,6 +10,12 @@ class TimbreImage extends CRUD {
         'timbre_idtimbre'
     ];
 
+    /*
+    ======================================================
+    GET IMAGE : Récupérer les images associées à un timbre
+    ======================================================
+    */
+
     public function getImages($timbreId)
     {
         $sql = "SELECT url, type_image FROM timbre_image WHERE timbre_idtimbre = ?";

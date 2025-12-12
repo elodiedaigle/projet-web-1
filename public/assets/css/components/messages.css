@@ -1,4 +1,8 @@
-/* Message - Conteneur */
+/* 
+==============================================
+MESSAGE - CONTENEUR
+==============================================
+*/
 
 .message-erreur {
     color: var(--rouge-accent);
@@ -6,7 +10,11 @@
     margin-top: 4px;
 }
 
-/* Message - Indicateur visuel d'erreur */
+/* 
+==============================================
+MESSAGE - Indicateur d'erreur
+==============================================
+*/
 
 .form-errors {
     background: #FCECEC;
@@ -15,7 +23,12 @@
     margin-bottom: 1.5rem;
     border-radius: 5px;
 }
-/* Message - Indicateur visuel de succès */
+
+/* 
+==============================================
+MESSAGE - Indicateur de succès
+==============================================
+*/
 
 .form-success {
     background: #E6F5EA;

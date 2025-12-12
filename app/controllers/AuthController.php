@@ -6,18 +6,28 @@ use App\Models\Utilisateur;
 
 class AuthController {
 
-    // Afficher le formulaire d'inscription
+    /* 
+    ===============================================
+    REGISTER : Afficher le formulaire d'inscription
+    ===============================================
+    */
+
     public function register() {
         return View::render('auth/register');
     }
 
-    // Traiter le formulaire d'inscription
+    /* 
+    ===================================================
+    REGISTER POST : Gestion du formulaire d'inscription
+    ===================================================
+    */
+
     public function registerPost($post = []) {
         $prenom = trim($post['prenom'] ?? '');
         $nom = trim($post['nom'] ?? '');
         $courriel = trim($post['courriel'] ?? '');
         $motDePasse = $post['mot_de_passe'] ?? '';
-        $motDePasseConfirmation = $post['mot_de_passe_confirmation'];
+        $motDePasseConfirmation = $post['mot_de_passe_confirmation'] ?? '';
 
         // Validations
         $validator = new Validator();
@@ -56,12 +66,22 @@ class AuthController {
             return View::redirect('/login');
     }
 
-    // Afficher le formulaire de connexion
+    /* 
+    ===========================================
+    LOGIN : Afficher le formulaire de connexion
+    ===========================================
+    */
+
     public function login() {
         return View::render('auth/login');
     }
 
-    // Traiter le formulaire de connexion
+    /* 
+    =============================================
+    LOGIN POST : Gérer le formulaire de connexion
+    =============================================
+    */
+
     public function loginPost($post = []) {
         $courriel = trim($post['courriel'] ?? '');
         $motDePasse = $post['mot_de_passe'] ?? '';
@@ -101,7 +121,12 @@ class AuthController {
             return View::redirect('/');
     }
 
-    // Déconnexion
+    /* 
+    =======================================
+    LOGOUT : Détruire la session
+    =======================================
+    */
+
     public function logout() {
         session_destroy();
         return View::redirect('/');

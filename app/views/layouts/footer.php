@@ -1,9 +1,6 @@
-</main>
-
 <footer class="site-footer">
     <div class="container footer-inner">
 
-        <!-- Colonne 1 : Logo et description -->
         <div class="footer-col footer-brand">
             <img src="{{ base }}/assets/img/logo-stampee.png" alt="Logo Stampee" class="footer-logo">
             <p class="footer-description">
@@ -11,7 +8,6 @@
             </p>
         </div>
 
-        <!-- Colonne 2 : Liens utiles -->
         <div class="footer-col footer-links">
             <h3 class="footer-title">Navigation</h3>
             <ul>
@@ -21,7 +17,6 @@
             </ul>
         </div>
 
-        <!-- Colonne 3 : Contact (sans formulaire car pas encore prêt) -->
         <div class="footer-col footer-contact">
             <h3 class="footer-title">Contact</h3>
             <ul>

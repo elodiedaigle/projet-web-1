@@ -8,6 +8,12 @@ class Validator {
     private $value;
     private $name;
 
+    /* 
+    ============================================
+    FIELD : Définir le champ actuellement validé
+    ============================================
+    */
+
     public function field($key, $value, $name = null) {
         $this->key = $key;
         $this->value = $value;
@@ -15,7 +21,11 @@ class Validator {
         return $this;
     }
 
-    // Régles
+    /*
+    ====================
+    RÈGLE : Champ requis
+    ====================
+    */
 
     public function required() {
         if (empty($this->value)) {
@@ -24,6 +34,12 @@ class Validator {
         return $this;
     }
 
+    /*
+    ==========================
+    RÈGLE : Format du courriel
+    ==========================
+    */
+
     public function email() {
         if (!empty($this->value) && !filter_var($this->value, FILTER_VALIDATE_EMAIL)) {
             $this->errors[$this->key] = "Format de courriel invalide.";
@@ -31,12 +47,24 @@ class Validator {
         return $this;
     }
 
+    /*
+    ============================================
+    RÈGLE : Doit être identique à un autre champ
+    ============================================
+    */
+
     public function same($otherKey, $otherValue) {
         if ($this->value !== $otherValue) {
             $this->errors[$this->key] = "{$this->name} ne correspond pas.";
         }
         return $this;
     }
+
+    /*
+    ====================================
+    RÈGLE : Valeur unique dans un modèle
+    ====================================
+    */
 
     public function unique($modelName) {
         $modelClass = "App\\Models\\$modelName";
@@ -51,11 +79,21 @@ class Validator {
         return $this;
     }
 
-    // Règles fin
+    /*
+    =======================
+    Vérifier si tout est ok
+    =======================
+    */
 
     public function isSuccess() {
         return empty($this->errors);
     }
+
+    /*
+    =====================
+    Récupérer les erreurs
+    =====================
+    */
 
     public function getErrors() {
         return $this->errors;

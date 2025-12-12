@@ -1,13 +1,18 @@
+// Attendre que la page soit chargée
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Sélectionner le formulaire
     const form = document.querySelector('#form-register');
     if (!form) return;
 
+    // Sélectionner les champs du formulaire
     const prenom = form.querySelector('input[name="prenom"]');
     const nom = form.querySelector('input[name="nom"]');
     const courriel = form.querySelector('input[name="courriel"]');
     const mdp = form.querySelector('input[name="mot_de_passe"]');
     const mdpConf = form.querySelector('input[name="mot_de_passe_confirmation"]');
 
+    // Afficher un message d'erreur
     const showError = (input, message) => {
         const container = input.closest('.form-group');
         const msg = container.querySelector('.message-erreur');
@@ -15,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.add('erreur');
     };
 
+    // Effacer un message d'erreur
     const clearError = (input) => {
         const container = input.closest('.form-group');
         const msg = container.querySelector('.message-erreur');
@@ -22,10 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.remove('erreur');
     };
 
+    // Vérifier le format du courriel
     const isEmailValid = (email) => {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     };
 
+    // Validations
     form.addEventListener('submit', (e) => {
         let valid = true;
 

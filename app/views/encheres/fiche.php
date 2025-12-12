@@ -3,7 +3,6 @@
 <section class="section">
     <div class="container fiche-layout">
 
-        <!-- Boîte de gauche : Titre, images, info, statut -->
         <div class="fiche-box fiche-left">
             <h1 class="fiche-title">{{ enchere.timbre_nom }}</h1>
 
@@ -18,7 +17,6 @@
                     />
                 {% endif %}
 
-                {# Galerie des miniatures : on commence par l'image principale #}
                 <div class="fiche-thumbs">
 
                     {% if imagePrincipale %}
@@ -62,7 +60,6 @@
 
         </div>
 
-        <!-- Boîte de droite : mise -->
         <div class="fiche-box fiche-right">
 
             {% if enchere.est_active %}
@@ -93,7 +90,7 @@
             </p>
 
             {% elseif enchere.est_active %}
-            <form action="{{ base }}/encheres/offre" method="POST" class="form-auth" novalidate>
+            <form id="form-offre" action="{{ base }}/encheres/offre" method="POST" class="form-auth" novalidate>
                 <input type="hidden" name="enchere_id" value="{{ enchere.idenchere }}">
 
                 <div class="form-group">

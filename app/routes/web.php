@@ -1,8 +1,20 @@
 <?php
 use App\Routes\Route;
 
+/* 
+=======
+ACCUEIL
+=======
+*/
+
 // HomeController
 Route::get('/', 'HomeController@index');
+
+/* 
+================
+AUTHENTIFICATION
+================
+*/
 
 // Register
 Route::get('/register', 'AuthController@register');
@@ -15,10 +27,19 @@ Route::post('/login', 'AuthController@loginPost');
 // Logout
 Route::get('/logout', 'AuthController@logout');
 
-// Portails encheres
+/* 
+========
+ENCHÈRES
+========
+*/
+
+// Portail enchères actives
 Route::get('/encheres/actives', 'EnchereController@actives');
 
-// Fiche
+// Portail enchères archivées
+Route::get('/encheres/archivees', 'EnchereController@archivees');
+
+// Fiche détail
 Route::get('/encheres/fiche', 'EnchereController@fiche');
 
 // Création enchères

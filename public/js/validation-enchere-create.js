@@ -1,12 +1,16 @@
+// Attendre que la page soit chargée
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Sélectionner le formulaire
     const form = document.querySelector('#form-creer-enchere');
     if (!form) return;
 
+    // Sélectionner les champs du formulaire
     const nom = form.querySelector('#nom');
     const annee = form.querySelector('#annee_publication');
     const tirage = form.querySelector('#tirage');
     const dimensions = form.querySelector('#dimensions');
-    const couleurs = form.querySelector('#couleurs');
+    const couleurs = form.querySelectorAll('input[name="couleurs[]"]');
     const pays = form.querySelector('#pays');
     const condition = form.querySelector('#condition');
     const prix = form.querySelector('#prix_plancher');
@@ -14,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fermeture = form.querySelector('#date_fermeture');
     const image = form.querySelector('#image_principale');
 
+    // Afficher un message d'erreur
     const showError = (input, message) => {
         const container = input.closest('.form-group');
         const msg = container.querySelector('.message-erreur');
@@ -21,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.add('erreur');
     };
 
+    // Effacer un message d'erreur
     const clearError = (input) => {
         const container = input.closest('.form-group');
         const msg = container.querySelector('.message-erreur');
@@ -28,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.classList.remove('erreur');
     };
 
+    // Validations
     form.addEventListener('submit', (e) => {
         let valid = true;
 
@@ -56,10 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else clearError(dimensions);
 
         // Couleurs
-        if (couleurs.selectedOptions.length === 0) {
+        const couleurChoisie = Array.from(couleurs).some(c => c.checked);
+
+        if (!couleurChoisie) {
             valid = false;
-            showError(couleurs, 'Au moins une couleur est requise.');
-        } else clearError(couleurs);
+            showError(couleurs[0], 'Sélectionnez au moins une couleur.');
+        } else clearError(couleurs[0]);
 
         // Pays
         if (pays.value.trim() === '') {

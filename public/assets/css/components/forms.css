@@ -1,4 +1,8 @@
-/* Fomulaire - Conteneur */
+/* 
+==============================================
+FORMULAIRE - CONTENEUR
+==============================================
+*/
 
 .auth-container {
     max-width: 650px;
@@ -8,7 +12,11 @@
     border-radius: 8px;
 }
 
-/* Fomulaire - Titres (h3) */
+/* 
+==============================================
+FORMULAIRE — TITRES (h3)
+==============================================
+*/
 
 .section-title {
     font-family: "Merriweather", serif;
@@ -21,7 +29,11 @@
     padding-bottom: .4rem;
 }
 
-/* Fomulaire - Groupe de champs */
+/* 
+==============================================
+FORMULAIRE — GROUPES DE CHAMPS
+==============================================
+*/
 
 .form-group {
     margin-bottom: 1.5rem;
@@ -34,7 +46,11 @@
     font-weight: 600;
 }
 
-/* Formulaire - Inputs et selects */
+/* 
+==============================================
+FORMULAIRE — INPUTS & SELECTS
+==============================================
+*/
 
 .form-group input,
 .form-group select {
@@ -46,6 +62,7 @@
     background: var(--blanc);
 }
 
+/* Inputs fichiers */
 .form-group input[type="file"] {
     padding: 8px;
     border: 1px dashed var(--taupe);
@@ -57,7 +74,11 @@
     border-color: var(--bleu-royal);
 }
 
-/* Formulaire - Checkbox */
+/* 
+==============================================
+FORMULAIRE — CHECKBOX
+==============================================
+*/
 
 .checkbox-group {
     display: grid;
@@ -72,12 +93,14 @@
     font-size: .95rem;
 }
 
+/* Checkboxes individuelles */
 .form-group input[type="checkbox"] {
     width: auto;
     margin-right: 6px;
     transform: scale(1.2);
 }
 
+/* Checkbox "Certifié" */
 .checkbox--single {
     margin-top: 6px;
     font-size: 1rem;
@@ -90,7 +113,11 @@
     transform: scale(1.25);
 }
 
-/* Fomulaire - Liens */
+/* 
+==============================================
+FORMULAIRE — LIEN SOUS LE FORMULAIRE
+==============================================
+*/
 
 .auth-link {
     margin-top: 1.2rem;
@@ -107,7 +134,11 @@
     opacity: 0.8;
 }
 
-/* Formulaire - Erreurs JS */
+/* 
+==============================================
+FORMULAIRE — ERREURS (JS)
+==============================================
+*/
 
 .form-group.erreur input {
     border-color: var(--rouge-accent);
@@ -120,7 +151,11 @@
     margin-top: 4px;
 }
 
-/* Fomulaire - Offre */
+/* 
+==============================================
+FORMULAIRE — STYLE DU FORMULAIRE D'OFFRES
+==============================================
+*/
 
 .fiche-right .form-group {
     margin-top: 1.4rem;

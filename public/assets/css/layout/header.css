@@ -1,4 +1,8 @@
-/* Header général */
+/* 
+==================================================
+HEADER — GÉNÉRAL
+==================================================
+*/
 
 .site-header {
     background-color: var(--bleu-royal);
@@ -11,14 +15,22 @@
     justify-content: space-between;
 }
 
-/* Header - Logo */
+/* 
+==================================================
+LOGO
+==================================================
+*/
 
 .logo img {
     height: 60px;
 }
 
 
-/* Navigation - Général */
+/* 
+==================================================
+NAVIGATION — GÉNÉRALE
+==================================================
+*/
 
 .nav {
     display: flex;
@@ -26,70 +38,6 @@
     gap: 3rem;
     flex: 1;
     justify-content: space-between;
-}
-
-/* Navigation - Principale (Gauche) */
-
-.nav__left {
-    list-style: none;
-    display: flex;
-    gap: 2.5rem;
-    margin: 0;
-    padding: 0;
-}
-
-/* Navigation - Dropdown */
-
-.nav-dropdown {
-    position: relative;
-    cursor: pointer;
-}
-
-.nav-dropdown__label {
-    color: var(--blanc);
-    font-weight: 500;
-    font-size: 1rem;
-    display: inline-block;
-    padding-bottom: 4px;
-}
-
-.nav-dropdown__menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--bleu-royal);
-    padding: 0.6rem 0;
-    border-radius: 6px;
-    min-width: 180px;
-    list-style: none;
-    z-index: 20;
-}
-
-.nav-dropdown__menu li a {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: var(--blanc);
-    font-size: 0.95rem;
-}
-
-.nav-dropdown__menu li a:hover {
-    background: var(--bleu-clair);
-}
-
-.nav-dropdown:hover .nav-dropdown__menu {
-    display: block;
-}
-
-
-/* Navigation - Auth (Droite) */
-
-.nav__right {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
 }
 
 .nav__left a,
@@ -106,8 +54,93 @@
     color: var(--taupe);
 }
 
-/* Navigation - Mobile */
+/* 
+==================================================
+NAVIGATION GAUCHE
+==================================================
+*/
 
+.nav__left {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+==================================================
+DROPDOWN
+==================================================
+*/
+
+.nav-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Étiquette du dropdown */
+.nav-dropdown__label {
+    color: var(--blanc);
+    font-weight: 500;
+    font-size: 1rem;
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+/* Menu déroulant */
+.nav-dropdown__menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--bleu-royal);
+    padding: 0.6rem 0;
+    border-radius: 6px;
+    min-width: 180px;
+    list-style: none;
+    z-index: 20;
+}
+
+/* Options du menu */
+.nav-dropdown__menu li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--blanc);
+    font-size: 0.95rem;
+}
+
+/* Hover */
+.nav-dropdown__menu li a:hover {
+    background: var(--bleu-clair);
+}
+
+.nav-dropdown:hover .nav-dropdown__menu {
+    display: block;
+}
+
+/* 
+==================================================
+NAVIGATION DROITE
+==================================================
+*/
+
+.nav__right {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+==================================================
+NAVIGATION MOBILE
+==================================================
+*/
+
+
+/* Icone burger */
 .burger {
     display: none;
     flex-direction: column;
@@ -125,6 +158,7 @@
     border-radius: 3px;
 }
 
+/* Panneau mobile */
 .nav-mobile {
     display: none;
 }
@@ -151,7 +185,11 @@
 }
 
 
-/* RESPONSIVE */
+/* 
+==================================================
+RESPONSIVE
+==================================================
+*/
 
 @media (max-width: 900px) {
 
@@ -178,7 +216,7 @@
         flex-direction: column;
         gap: 1.8rem;
         transition: 0.35s ease;
-        box-shadow: -4px 0 12px rgba(0,0,0,0.25);
+        box-shadow: -4px 0 12px rgba(0, 0, 0, 0.25);
     }
 
     .nav-mobile.open {
