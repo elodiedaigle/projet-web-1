@@ -62,11 +62,31 @@
 
         <div class="fiche-box fiche-right">
 
-            {% if enchere.est_active %}
-                <div class="fiche-badge fiche-badge--active">Active</div>
-            {% else %}
-                <div class="fiche-badge fiche-badge--closed">Terminée</div>
-            {% endif %}
+            <div class="fiche-actions-top">
+
+                {% if enchere.est_active %}
+                    <div class="fiche-badge fiche-badge--active">Active</div>
+                {% else %}
+                    <div class="fiche-badge fiche-badge--closed">Terminée</div>
+                {% endif %}
+
+                {% if session.user_id %}
+                    <form method="POST"
+                        action="{{ base }}/encheres/favori"
+                        class="form-favori">
+
+                        <input type="hidden" name="enchere_id" value="{{ enchere.idenchere }}">
+                        <input type="hidden" name="timbre_id" value="{{ enchere.idtimbre }}">
+
+                        <button type="submit"
+                                class="btn-favori {% if est_favori %}is-active{% endif %}"
+                                aria-label="Ajouter aux favoris">
+                            <i class="{% if est_favori %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
+                        </button>
+                    </form>
+                {% endif %}
+
+            </div>
 
             <h2 class="fiche-form-title">Enchère</h2>
 

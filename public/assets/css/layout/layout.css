@@ -245,11 +245,12 @@ FICHE DÉTAIL — BOITE GAUCHE
 
 .fiche-image {
   width: 100%;
+  max-width: 350px;
   height: 350px;
-  border-radius: 12px;
   object-fit: contain;
-  background: transparent;
-  padding: 8px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
 }
 
 .fiche-thumbs {
@@ -340,6 +341,18 @@ FICHE DÉTAIL — BOITE DROITE
   color: var(--bleu-royal);
   font-weight: bold;
   text-decoration: underline;
+}
+
+.fiche-actions-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.form-favori {
+  margin: 0;
 }
 
 /* 

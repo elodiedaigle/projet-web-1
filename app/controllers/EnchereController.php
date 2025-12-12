@@ -9,6 +9,7 @@ use App\Models\TimbreCouleur;
 use App\Models\TimbreCondition;
 use App\Models\TimbrePays;
 use App\Models\Offre;
+use App\Models\Favori;
 use App\Providers\View;
 use App\Providers\Validator;
 
@@ -97,6 +98,15 @@ class EnchereController
             return View::redirect('/encheres/actives');
         }
 
+        // Charger l'état favori
+        $estFavori = false;
+
+        if (isset($_SESSION['user_id'])) {
+            $favoriModel = new Favori();
+            $favori = $favoriModel->exists($_SESSION['user_id'], $enchere['idtimbre']);
+            $estFavori = $favori ? true : false;
+        }
+
         // Charger les images
         $imgModel = new TimbreImage();
         $images = $imgModel->getImages($enchere['idtimbre']);
@@ -117,17 +127,59 @@ class EnchereController
         $offreModel = new Offre();
         $offres = $offreModel->getByEnchere($id);
         $maxOffer = $offreModel->getHighestBid($id);
-        $prixMin = max($enchere['prix_plancher'], $maxOffer ?: 0) + 1;
 
+        if ($maxOffer === null) {
+            $prixMin = $enchere['prix_plancher'];
+        } else {
+            $prixMin = $maxOffer + 1;
+        }
 
         return View::render('encheres/fiche', [
             'enchere' => $enchere,
             'imagePrincipale' => $imagePrincipale,
             'imagesSecondaires' => $imagesSecondaires,
             'offres' => $offres,
-            'prixMin' => $prixMin
+            'prixMin' => $prixMin,
+            'est_favori' => $estFavori
         ]);
     }
+
+     /* 
+    ========================================================
+    TOGGLE FAVORI : Ajouter ou retirer une enchère en favori
+    ========================================================
+    */
+
+    public function toggleFavori($post = []) {
+
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['user_id'])) {
+            return View::redirect('/login');
+        }
+
+        // Récupérer les informations nécessaires
+        $utilisateurId = $_SESSION['user_id'];
+        $enchereId = (int)($post['enchere_id'] ?? 0);
+        $timbreId = (int)($post['timbre_id'] ?? 0);
+
+        // Validations
+        if ($enchereId === 0 || $timbreId === 0) {
+            return View::redirect('/encheres/actives');
+        }
+
+        // Ajouter ou retirer le favori selon l'état actuel
+        $favoriModel = new Favori();
+        $existe = $favoriModel->exists($utilisateurId, $timbreId);
+
+        if ($existe) {
+            $favoriModel->deleteByUserAndTimbre($utilisateurId, $timbreId);
+        } else {
+            $favoriModel->add($utilisateurId, $timbreId);
+        }
+
+        return View::redirect('/encheres/fiche?id=' . $enchereId);
+    }
+
 
     /* 
     =====================================================
@@ -335,19 +387,23 @@ class EnchereController
 
         // Vérifier la meilleure offre
         $maxOffer = $offreModel->getHighestBid($enchereId);
-        $prixMin = max($enchere['prix_plancher'], $maxOffer ?: 0);
 
-        if ($montant <= $prixMin) {
+        if ($maxOffer === null) {
+            $prixMin = $enchere['prix_plancher'];
+        } else {
+            $prixMin = $maxOffer + 1;
+        }
+
+        if ($montant < $prixMin) {
             return View::render('encheres/fiche', [
                 'enchere' => $enchere,
                 'imagePrincipale' => $imagePrincipale,
                 'imagesSecondaires' => $imagesSecondaires,
                 'offres' => $offres,
-                'erreur_offre' => "L'offre doit être supérieure à {$prixMin}$"
+                'erreur_offre' => "L'offre minimale est de {$prixMin}$"
             ]);
         }
 
-        // Quand tout est validé, insérer
         $offreModel->insert([
             'montant_offert' => $montant,
             'date_offre' => date('Y-m-d H:i:s'),

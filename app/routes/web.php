@@ -48,3 +48,6 @@ Route::post('/encheres/create', 'EnchereController@createPost');
 
 // Offre
 Route::post('/encheres/offre', 'EnchereController@offrePost');
+
+// Favoris
+Route::post('/encheres/favori', 'EnchereController@toggleFavori');

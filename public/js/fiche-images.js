@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Sélectionner l'image principale affichée dans la fiche
     const mainImg = document.getElementById("fiche-image-principale");
 
-    // Sélectionner les miniatures
+    // Sélectionner les miniatures cliquables
     const thumbs = document.querySelectorAll(".fiche-thumb");
 
     // Remplacer l'image vue en gros quand on clique sur une miniature
