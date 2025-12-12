@@ -62,3 +62,26 @@ BOUTONS FILTRES
 .btn-reset:hover {
   background: #dcdcdc;
 }
+
+/* 
+==============================================
+BOUTON FAVORI
+==============================================
+*/
+
+.btn-favori {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #e6e6e6;
+  margin-top: 0.25rem;
+}
+
+.btn-favori.is-active {
+  color: #c8352d;
+}
+
+.btn-favori:hover {
+  transform: scale(1.1);
+}
