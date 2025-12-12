@@ -1,11 +1,16 @@
-/* Base générale */
+/* 
+==============================================
+BASE GÉNÉRALE
+==============================================
+*/
 
-html, body {
+/* Pleine hauteur du body */
+html,
+body {
     height: 100%;
 }
 
-/* Texte général */
-
+/* Style général */
 body {
     font-family: "Quicksand", sans-serif;
     background-color: var(--beige);
@@ -15,7 +20,16 @@ body {
     flex-direction: column;
 }
 
-h1, h2, h3, h4,
+/* 
+==============================================
+TITRES ET TYPO
+==============================================
+*/
+
+h1,
+h2,
+h3,
+h4,
 .section__title,
 .section__title--hero {
     font-family: "Merriweather", serif;
@@ -23,29 +37,42 @@ h1, h2, h3, h4,
     color: var(--rouge-fonce);
 }
 
-/* Images responsives */
+/* 
+==============================================
+IMAGES
+==============================================
+*/
 
+/* Image responsive */
 img {
     max-width: 100%;
     height: auto;
 }
 
-/* Liens */
+/* 
+==============================================
+LIENS
+==============================================
+*/
 
 a {
     color: inherit;
     text-decoration: none;
 }
 
-/* Conteneur général */
+/* 
+==============================================
+CONTENEURS
+==============================================
+*/
 
+/* Conteneur général */
 .container {
     width: min(1200px, 90%);
     margin: 0 auto;
 }
 
 /* Contenu principal */
-
 .main-content {
     padding-top: 2rem;
     padding-bottom: 4rem;

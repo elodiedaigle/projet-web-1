@@ -65,12 +65,12 @@
                 <button class="btn-primary">Appliquer</button>
             </form>
 
-            <a href="{{ base }}/encheres/actives" class="btn-reset">Réinitialiser</a>
+            <a href="{{ base }}/encheres/archivees" class="btn-reset">Réinitialiser</a>
 
         </aside>
 
         <div class="enchere-content">
-            <h1 class="section__title">Enchères actives</h1>
+            <h1 class="section__title">Enchères archivées</h1>
 
             {% if encheres is not empty %}
                 <div class="enchere-grid">
@@ -99,7 +99,7 @@
 
                 </div>
             {% else %}
-                <p>Aucune enchère active pour le moment.</p>
+                <p>Aucune enchère archivées pour le moment.</p>
             {% endif %}
         </div>
 

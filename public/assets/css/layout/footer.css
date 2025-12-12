@@ -1,4 +1,9 @@
-/* Footer */
+/* 
+==================================================
+FOOTER - SECTION PRINCIPALE
+==================================================
+*/
+
 
 .site-footer {
     background-color: var(--bleu-royal);
@@ -6,6 +11,7 @@
     padding-top: 2.5rem;
 }
 
+/* Grille principale du footer */
 .footer-inner {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -13,20 +19,30 @@
     padding-bottom: 2rem;
 }
 
-/* Footer - Colonne logo */
+/* 
+==================================================
+FOOTER - COLONNE MARQUE
+==================================================
+*/
 
+/* Logo */
 .footer-logo {
     width: 140px;
     height: auto;
     margin-bottom: 1rem;
 }
 
+/* Texte descriptif */
 .footer-description {
     font-size: 0.95rem;
     line-height: 1.5;
 }
 
-/* Footer - Tites */
+/* 
+==================================================
+FOOTER - TITRES DE COLONNES
+==================================================
+*/
 
 .footer-title {
     font-size: 1.2rem;
@@ -35,14 +51,20 @@
     color: var(--blanc);
 }
 
-/* Footer - Liens */
+/* 
+==================================================
+FOOTER - LIENS ET CONTACT
+==================================================
+*/
 
+/* Listes sans puces */
 .footer-links ul,
 .footer-contact ul {
     list-style: none;
     padding: 0;
 }
 
+/* Style général des liens */
 .footer-links a,
 .footer-contact a {
     color: var(--blanc);
@@ -51,28 +73,40 @@
     transition: opacity 0.2s ease;
 }
 
+/* Hover */
 .footer-links a:hover,
 .footer-contact a:hover {
     opacity: 0.7;
 }
 
-/* Footer - Bas */
+/* 
+==================================================
+FOOTER - BAS 
+==================================================
+*/
 
 .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     text-align: center;
     padding: 1rem;
     font-size: 0.85rem;
 }
 
-/* RESPONSIVE */
+/* 
+==================================================
+FOOTER - RESPONSIVE
+==================================================
+*/
 
 @media (max-width: 900px) {
+
+    /* Une seule colonne en mobile */
     .footer-inner {
         grid-template-columns: 1fr;
         text-align: center;
     }
 
+    /* Centrer le logo */
     .footer-logo {
         margin-inline: auto;
     }

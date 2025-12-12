@@ -6,6 +6,12 @@ class TimbrePays extends CRUD {
     protected $primaryKey = 'idPays';
     protected $fillable = ['nom'];
 
+    /* 
+    =======================================
+    FIND BY NOM : Récupérer un pays par nom
+    =======================================
+    */
+
     public function findByNom($nom) {
         $sql = "SELECT * FROM $this->table WHERE nom = ?";
         $stmt = $this->prepare($sql);

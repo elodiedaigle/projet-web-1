@@ -11,6 +11,12 @@ class Offre extends CRUD {
         'enchere_idenchere'
     ];
 
+    /* 
+    =================================================
+    GET BY ENCHERE : Récupérer les offres par enchère
+    =================================================
+    */
+
     public function getByEnchere($idEnchere) {
         $sql = "SELECT o.*, u.prenom, u.nom
                 FROM offre o
@@ -23,6 +29,12 @@ class Offre extends CRUD {
         $stmt->execute([$idEnchere]);
         return $stmt->fetchAll();
     }
+
+    /* 
+    =====================================================================
+    GET HIGHEST BID : Récupérer la plus grosse offre actuelle par enchère
+    =====================================================================
+    */
 
     public function getHighestBid($idEnchere) {
         $sql = "SELECT MAX(montant_offert) AS max FROM offre WHERE enchere_idenchere = ?";

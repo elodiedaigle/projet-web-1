@@ -80,7 +80,7 @@
             <label for="certifie">Certifié</label>
 
             <label class="checkbox-item checkbox--single">
-                <input type="checkbox" id="certifie" name="certifie" value="1">
+                <input type="checkbox" id="certifie" name="certifie" value="1" {% if old.certifie is defined %}checked{% endif %}>
                 Oui
             </label>
         </div>
@@ -108,13 +108,13 @@
 
         <div class="form-group">
             <label for="date_ouverture">Date d'ouverture</label>
-            <input type="datetime-local" id="date_ouverture" name="date_ouverture" required>
+            <input type="datetime-local" id="date_ouverture" name="date_ouverture" value="{{ old.date_ouverture ?? '' }}" required>
             <div class="message-erreur"></div>
         </div>
 
         <div class="form-group">
             <label for="date_fermeture">Date de fermeture</label>
-            <input type="datetime-local" id="date_fermeture" name="date_fermeture" required>
+            <input type="datetime-local" id="date_fermeture" name="date_fermeture" value="{{ old.date_fermeture ?? '' }}" required>
             <div class="message-erreur"></div>
         </div>
 

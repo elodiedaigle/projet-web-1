@@ -1,6 +1,11 @@
 <?php
 namespace App\Models;
 
+/*
+=============================
+TIMBRE : Représente un timbre
+=============================
+*/
 class Timbre extends CRUD {
     protected $table = 'timbre';
     protected $primaryKey = 'idtimbre';

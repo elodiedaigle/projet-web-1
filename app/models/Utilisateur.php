@@ -6,6 +6,12 @@ class Utilisateur extends CRUD {
     protected $primaryKey = 'idutilisateur';
     protected $fillable = ['nom', 'prenom', 'courriel', 'password_hash'];
 
+    /* 
+    =========================================================
+    FIND BY EMAIL : Récupérer un utilisateur par son courriel
+    =========================================================
+    */
+
     public function findByEmail($courriel) {
         $sql = "SELECT * FROM $this->table WHERE courriel = ?";
         $stmt = $this->prepare($sql);

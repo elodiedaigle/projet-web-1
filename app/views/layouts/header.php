@@ -16,12 +16,10 @@
 <header class="site-header">
     <div class="container header-inner">
 
-        <!-- Logo -->
          <a href="{{ base }}/" class="logo">
             <img src="{{ base }}/assets/img/logo-stampee.png" alt="Logo Stampee">
          </a>
 
-         <!-- Navigation -->
           <nav class="nav">
 
             <ul class="nav__left">
@@ -39,7 +37,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ base }}/encheres/archives">Enchères archivées</a>
+                            <a href="{{ base }}/encheres/archivees">Enchères archivées</a>
                         </li>
                     </ul>
                 </li>
@@ -68,7 +66,6 @@
 
           </nav>
 
-          <!-- Navigation mobile : Menu burger -->
             <div class="burger">
                 <span></span>
                 <span></span>
@@ -80,7 +77,7 @@
 
                 <span class="nav-section-title">Enchères</span>
                 <a href="{{ base }}/encheres/actives" class="nav-subitem">• Actives</a>
-                <a href="{{ base }}/encheres/archives" class="nav-subitem">• Archivées</a>
+                <a href="{{ base }}/encheres/archivees" class="nav-subitem">• Archivées</a>
 
                 {% if not session.user_id %}
                     <a href="{{ base }}/register">Devenir membre</a>
@@ -92,5 +89,3 @@
             </nav>
     </div>
 </header>
-
-<main class="main-content">

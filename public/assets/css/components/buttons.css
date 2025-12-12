@@ -1,21 +1,64 @@
+/* 
+==============================================
+BOUTON PRINCIPAL
+==============================================
+*/
+
+/* Style général */
 .btn-primary {
-    width: 100%;
-    padding: 12px;
-    background: var(--bleu-royal);
-    color: var(--blanc);
-    border: none;
-    border-radius: 5px;
-    margin-top: 2rem;
-    font-size: 1.1rem;
-    cursor: pointer;
+  width: 100%;
+  padding: 12px;
+  background: var(--bleu-royal);
+  color: var(--blanc);
+  border: none;
+  border-radius: 5px;
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
 }
 
+/* Style hover */
 .btn-primary:hover {
-    background: var(--bleu-clair);
+  background: var(--bleu-clair);
 }
 
+/* 
+==============================================
+BOUTONS FILTRES
+==============================================
+*/
+
+/* Bouton Filtrer - Style général */
+.enchere-filters .btn-primary {
+  margin-top: 1rem;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 6px;
+}
+
+/* Bouton Filtrer - Style hover */
 .enchere-card__btn {
-    margin-top: 1rem;
-    display: block;
-    text-align: center;
+  margin-top: 1rem;
+  display: block;
+  text-align: center;
+}
+
+/* Bouton Reset - Style général */
+.btn-reset {
+  width: 100%;
+  background: #e6e6e6;
+  color: #333;
+  padding: 0.35rem;
+  border-radius: 6px;
+  text-align: center;
+  display: block;
+  font-weight: 600;
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  border: 1px solid #d5d5d5;
+}
+
+/* Bouton Reset - Style hover */
+.btn-reset:hover {
+  background: #dcdcdc;
 }

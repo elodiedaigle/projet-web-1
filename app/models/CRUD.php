@@ -2,13 +2,25 @@
 namespace App\Models;
 
 abstract class CRUD extends \PDO {
+    
+    /* 
+    ================================================
+    CONSTRUCTEUR : Se connecter à la base de données
+    ================================================
+    */
 
     final public function __construct(){
         parent::__construct('mysql:host=127.0.0.1; dbname=stampee; port=3306; charset=utf8', 'root', 'admin1234!');
     }
 
-    final public function select($field = null, $order = 'ASC')
-{
+    /* 
+    ===============================================
+    SELECT : Récupérer toutes les données du modèle
+    ===============================================
+    */
+
+    final public function select($field = null, $order = 'ASC'){
+
     // Si aucune clé primaire n'est définie, faire un SELECT normal
     if (!$this->primaryKey) {
         $sql = "SELECT * FROM $this->table";
@@ -24,7 +36,13 @@ abstract class CRUD extends \PDO {
     $sql = "SELECT * FROM $this->table ORDER BY $field $order";
     $stmt = $this->query($sql);
     return $stmt->fetchAll();
-}
+    }
+
+    /* 
+    =============================================
+    SELECT BY ID : Récupérer une ligne selon l'id
+    =============================================
+    */
 
     final public function selectId($value){
         $sql = "SELECT * FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
@@ -38,6 +56,12 @@ abstract class CRUD extends \PDO {
             return false;
         }    
     }
+
+    /* 
+    =====================================
+    INSERT : Insérer de nouvelles données
+    =====================================
+    */
 
     final public function insert($data){
 
@@ -57,6 +81,12 @@ abstract class CRUD extends \PDO {
         return $this->lastInsertId();
     }
     
+    /* 
+    =============================================
+    UPDATE : Mettre à jour des données existantes
+    =============================================
+    */
+
     public function update($data, $id){
 
         $data_keys = array_fill_keys($this->fillable, '');
@@ -80,6 +110,13 @@ abstract class CRUD extends \PDO {
             return false;
         }
     }
+
+    /* 
+    =========================================
+    DELETE : Supprimer des données existantes
+    =========================================
+    */
+
     public function delete($value){
         $sql = "DELETE FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
         $stmt = $this->prepare($sql);
@@ -91,6 +128,12 @@ abstract class CRUD extends \PDO {
             return false;
         }
     }
+
+    /* 
+    ==========================================
+    UNIQUE : Vérifier qu'une valeur est unique
+    ==========================================
+    */
 
     public function unique ($field, $value){
         $sql = "SELECT * FROM $this->table WHERE $field = :$field";

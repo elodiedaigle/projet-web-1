@@ -1,12 +1,18 @@
-/* Sections générales */
+/* 
+==============================================
+SECTIONS — GÉNÉRAL
+==============================================
+*/
 
+/* Section de base */
 .section {
-  padding-block: 2.5rem;
+  padding: 3rem 0;
+  display: block;
 }
 
 /* Section Hero */
 .section--hero {
-  padding-block: 3rem 2.5rem;
+  padding-block: 2rem 1.5rem;
 }
 
 /* Titre Hero */
@@ -27,46 +33,134 @@
   margin: 0;
 }
 
-/* Section Courte présentation du Lord */
+/* 
+==============================================
+SECTION — PRÉSENTATION
+==============================================
+*/
 
 .section--panel {
-  padding: 0;
+  padding: 4rem 0;
 }
 
+/* Conteneur interne du panneau */
 .section--panel .container {
   background-color: var(--blanc);
   border-radius: 12px;
   padding: 2.5rem 3rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
+/* Bloc de texte centré */
 .section__block {
   max-width: 700px;
   margin-inline: auto;
 }
 
-.section__title {
-  font-size: 1.6rem;
-  margin-bottom: 0.75rem;
-}
-
-/* Encheres */
+/* 
+==============================================
+ENCHÈRES — GÉNÉRAL
+==============================================
+*/
 
 .enchere-layout {
-    display: block;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Zone des filtres — vide jusqu'au sprint 3 */
+/* 
+==============================================
+ENCHÈRES — FILTRES
+==============================================
+*/
+
+
 .enchere-filters {
-  display : none;
+  background: var(--blanc);
+  padding: 2.2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Ligne principale */
+.filters-separator {
+  border: none;
+  border-top: 2px solid var(--taupe);
+  margin: 1rem 0 2rem;
+}
+
+/* Sous-sections */
+.filter-group {
+  margin-bottom: 2.2rem;
+}
+
+.filter-group-title {
+  font-family: "Merriweather", serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--bleu-royal);
+  margin-bottom: 0.4rem;
+  margin-top: 1.2rem;
+}
+
+/* Inputs */
+.enchere-filters input[type="text"],
+.enchere-filters input[type="number"] {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--taupe);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+}
+
+/* Radios */
+.radio-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.radio-item {
+  padding: 0.4rem 0;
+  gap: 0.6rem;
+}
+
+.radio-item input {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.radio-item label {
+  font-size: 1rem;
+}
+
+/* Prix Min/Max */
+.filter-price {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.filter-price input {
+  padding: 0.7rem 0.8rem;
 }
 
 .enchere-content {
   width: 100%;
 }
 
-/* Grille */
+/* 
+==============================================
+ENCHÈRES — GRILLE ET CARTES
+==============================================
+*/
 
+/* Grille des enchères */
 .enchere-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -75,12 +169,11 @@
 }
 
 /* Cartes */
-
 .enchere-card {
   background: var(--blanc);
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
 }
@@ -108,11 +201,18 @@
 }
 
 .enchere-card__title {
-  font-size: 1.3rem;
+  font-family: "Merriweather", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
+  color: var(--rouge-fonce);
 }
 
-/* Fiche détail */
+/* 
+==============================================
+FICHE DÉTAIL
+==============================================
+*/
 
 .fiche-layout {
   display: grid;
@@ -126,14 +226,21 @@
   background: var(--blanc);
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* Fiche détail - Boite gauche */
+/* 
+==============================================
+FICHE DÉTAIL — BOITE GAUCHE
+==============================================
+*/
 
 .fiche-title {
-  font-size: 2rem;
+  font-size: 2.4rem;
   margin-bottom: 1.5rem;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  color: var(--rouge-fonce);
 }
 
 .fiche-image {
@@ -144,7 +251,6 @@
   background: transparent;
   padding: 8px;
 }
-
 
 .fiche-thumbs {
   display: flex;
@@ -192,7 +298,11 @@
   font-size: 0.95rem;
 }
 
-/* Fiche détail - Boite droite */
+/* 
+==============================================
+FICHE DÉTAIL — BOITE DROITE
+==============================================
+*/
 
 .fiche-right {
   position: relative;
@@ -219,8 +329,7 @@
   background: #555;
 }
 
-/* Fiche détail - Formulaire quand pas login */
-
+/* Message si non connecté */
 .fiche-login-msg {
   margin: 1rem 0;
   font-size: 1rem;
@@ -233,7 +342,11 @@
   text-decoration: underline;
 }
 
-/* Fiche détail - Liste des offres */
+/* 
+==============================================
+FICHE DÉTAIL — HISTORIQUE DES OFFRES
+==============================================
+*/
 
 .liste-offres {
   list-style: none;
@@ -263,7 +376,11 @@
   margin-top: 2px;
 }
 
-/* Responsive */
+/* 
+==============================================
+RESPONSIVE
+==============================================
+*/
 
 @media (max-width: 900px) {
 
@@ -290,7 +407,7 @@
   .section__block {
     max-width: 100%;
   }
-  
+
   .fiche-layout {
     grid-template-columns: 1fr;
   }
