@@ -55,6 +55,35 @@
                 </div>
 
                 <div class="filter-group">
+                    <p class="filter-group-title">Couleur</p>
+                    <ul class="radio-list">
+                        {% for col in couleurs %}
+                            <li class="radio-item">
+                                <input
+                                    type="radio"
+                                    id="couleur{{ col.idCouleur }}"
+                                    name="couleur"
+                                    value="{{ col.idCouleur }}"
+                                    {% if couleur == col.idCouleur %}checked{% endif %}
+                                >
+                                <label for="couleur{{ col.idCouleur }}">{{ col.nom }}</label>
+                            </li>
+                        {% endfor %}
+
+                        <li class="radio-item">
+                            <input
+                                type="radio"
+                                id="couleurAll"
+                                name="couleur"
+                                value=""
+                                {% if couleur is same as(null) or couleur == '' %}checked{% endif %}
+                            >
+                            <label for="couleurAll">Toutes</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="filter-group">
                     <p class="filter-group-title">Prix</p>
                     <div class="filter-price">
                         <input type="number" name="prix_min" placeholder="Min" value="{{ prix_min }}">

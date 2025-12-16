@@ -31,7 +31,8 @@ class EnchereController
             'condition' => $query['condition'] ?? null,
             'certifie' => $query['certifie']  ?? null,
             'prix_min' => $query['prix_min']  ?? null,
-            'prix_max' => $query['prix_max']  ?? null
+            'prix_max' => $query['prix_max']  ?? null,
+            'couleur'   => $query['couleur'] ?? null
         ];
 
         // Résultats
@@ -41,9 +42,14 @@ class EnchereController
         $conditionModel = new TimbreCondition();
         $conditions = $conditionModel->select();
 
+        // Charger les couleurs
+        $couleurModel = new Couleur();
+        $couleurs = $couleurModel->select();
+
         return View::render('encheres/actives', [
             'encheres' => $encheres,
-            'conditions'=> $conditions
+            'conditions'=> $conditions,
+            'couleurs'   => $couleurs
         ]);
     }
 
@@ -63,7 +69,8 @@ class EnchereController
             'condition' => $query['condition'] ?? null,
             'certifie' => $query['certifie']  ?? null,
             'prix_min' => $query['prix_min']  ?? null,
-            'prix_max' => $query['prix_max']  ?? null
+            'prix_max' => $query['prix_max']  ?? null,
+            'couleur'   => $query['couleur'] ?? null
         ];
 
         // Résultats
@@ -73,9 +80,14 @@ class EnchereController
         $conditionModel = new TimbreCondition();
         $conditions = $conditionModel->select();
 
+        // Charger les couleurs
+        $couleurModel = new Couleur();
+        $couleurs = $couleurModel->select();
+
         return View::render('encheres/archivees', [
             'encheres'   => $encheres,
-            'conditions' => $conditions
+            'conditions' => $conditions,
+            'couleurs'   => $couleurs
         ]);
     }
 
@@ -123,6 +135,9 @@ class EnchereController
             }
         }
 
+        // Charger les couleurs
+        $couleurs = $model->getCouleurs($enchere['idtimbre']);
+
         // Charger les offres
         $offreModel = new Offre();
         $offres = $offreModel->getByEnchere($id);
@@ -138,6 +153,7 @@ class EnchereController
             'enchere' => $enchere,
             'imagePrincipale' => $imagePrincipale,
             'imagesSecondaires' => $imagesSecondaires,
+            'couleurs' => $couleurs,
             'offres' => $offres,
             'prixMin' => $prixMin,
             'est_favori' => $estFavori

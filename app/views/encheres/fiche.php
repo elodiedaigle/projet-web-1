@@ -9,33 +9,21 @@
             <div class="fiche-images">
 
                 {% if imagePrincipale is defined and imagePrincipale %}
-                    <img 
-                        id="fiche-image-principale"
-                        src="{{ base }}/img/{{ imagePrincipale }}"
-                        alt="Image du timbre {{ enchere.timbre_nom }}"
-                        class="fiche-image"
-                    />
+                <div id="imageZoom" class="fiche-image-zoom" style="--url: url('{{ base }}/img/{{ imagePrincipale }}');">
+                    <img src="{{ base }}/img/{{ imagePrincipale }}" alt="Image du timbre {{ enchere.timbre_nom }}" class="fiche-image"/>
+                </div>
                 {% endif %}
+
 
                 <div class="fiche-thumbs">
 
                     {% if imagePrincipale %}
-                        <img 
-                            src="{{ base }}/img/{{ imagePrincipale }}"
-                            data-full="{{ base }}/img/{{ imagePrincipale }}"
-                            alt="Image principale du timbre"
-                            class="fiche-thumb"
-                        />
+                        <img src="{{ base }}/img/{{ imagePrincipale }}" data-full="{{ base }}/img/{{ imagePrincipale }}" alt="Image principale du timbre" class="fiche-thumb"/>
                     {% endif %}
 
                     {% if imagesSecondaires is defined and imagesSecondaires|length > 0 %}
                         {% for img in imagesSecondaires %}
-                            <img 
-                                src="{{ base }}/img/{{ img }}"
-                                data-full="{{ base }}/img/{{ img }}"
-                                alt="Image secondaire du timbre {{ enchere.timbre_nom }}"
-                                class="fiche-thumb"
-                            />
+                            <img src="{{ base }}/img/{{ img }}" data-full="{{ base }}/img/{{ img }}" alt="Image secondaire du timbre {{ enchere.timbre_nom }}" class="fiche-thumb"/>
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -50,6 +38,7 @@
                     <li><strong>Tirage :</strong> {{ enchere.tirage }}</li>
                     <li><strong>Dimensions :</strong> {{ enchere.dimensions }}</li>
                     <li><strong>Certifié :</strong> {{ enchere.certifie ? 'Oui' : 'Non' }}</li>
+                    <li><strong>Couleurs :</strong> {% for c in couleurs %}{{ c.nom }}{% if not loop.last %}, {% endif %}{% endfor %}</li>
                 </ul>
             </div>
 
@@ -78,9 +67,7 @@
                         <input type="hidden" name="enchere_id" value="{{ enchere.idenchere }}">
                         <input type="hidden" name="timbre_id" value="{{ enchere.idtimbre }}">
 
-                        <button type="submit"
-                                class="btn-favori {% if est_favori %}is-active{% endif %}"
-                                aria-label="Ajouter aux favoris">
+                        <button type="submit" class="btn-favori {% if est_favori %}is-active{% endif %}" aria-label="Ajouter aux favoris">
                             <i class="{% if est_favori %}fa-solid{% else %}fa-regular{% endif %} fa-heart"></i>
                         </button>
                     </form>
@@ -95,7 +82,7 @@
             </p>
 
             <p class="fiche-status-small">
-                Se termine le {{ enchere.date_fermeture | date("d/m/Y \\à H:i") }}
+                Fermeture le {{ enchere.date_fermeture | date("d/m/Y \\à H:i") }}
             </p>
 
             {% if erreur_offre is defined %}
@@ -104,27 +91,28 @@
              </div>
             {% endif %}
 
-            {% if not session.user_id %}
-            <p class="fiche-login-msg">
-                <a href="{{ base }}/login">Connectez-vous</a> pour faire une offre.
-            </p>
+            {% if not enchere.est_active %}
+            <p class="fiche-form-placeholder">Cette enchère est terminée.</p>
 
-            {% elseif enchere.est_active %}
-            <form id="form-offre" action="{{ base }}/encheres/offre" method="POST" class="form-auth" novalidate>
-                <input type="hidden" name="enchere_id" value="{{ enchere.idenchere }}">
-
-                <div class="form-group">
-                    <label for="montant">Votre offre</label>
-                    <input type="number" step="0.01" name="montant" id="montant" placeholder="Minimum {{ prixMin }}$">
-                    <div class="message-erreur"></div>
-                </div>
-
-                <button type="submit" class="btn-primary">Soumettre l'offre</button>
-            </form>
+            {% elseif not session.user_id %}
+                <p class="fiche-login-msg">
+                    <a href="{{ base }}/login">Connectez-vous</a> pour faire une offre.
+                </p>
 
             {% else %}
-            <p class="fiche-form-placeholder">Cette enchère est terminée.</p>
+                <form id="form-offre" action="{{ base }}/encheres/offre" method="POST" class="form-auth" novalidate>
+                    <input type="hidden" name="enchere_id" value="{{ enchere.idenchere }}">
+
+                    <div class="form-group">
+                        <label for="montant">Votre offre</label>
+                        <input type="number" step="0.01" name="montant" id="montant" placeholder="Minimum {{ prixMin }}$">
+                        <div class="message-erreur"></div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Soumettre l'offre</button>
+                </form>
             {% endif %}
+
 
             <h3 class="section-title">Historique des offres</h3>
 

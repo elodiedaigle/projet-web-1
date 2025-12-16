@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Providers\View;
+use App\Models\Enchere;
 use App\Models\Favori;
 
 class HomeController {
@@ -23,7 +24,15 @@ class HomeController {
             $favoris = $favoriModel->getByUser($_SESSION['user_id']);
         }
 
+        // Récupérer les enchères actives
+        $enchereModel = new Enchere();
+        $encheresActives = $enchereModel->getActives();
+
+        // Limiter l'aperçu pour la page d'accueil
+        $encheresActives = array_slice($encheresActives, 0, 4);
+
         return View::render('accueil/index', [
+            'encheresActives' => $encheresActives,
             'favoris' => $favoris
         ]);
     }

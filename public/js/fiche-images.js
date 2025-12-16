@@ -2,15 +2,25 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // Sélectionner l'image principale affichée dans la fiche
-    const mainImg = document.getElementById("fiche-image-principale");
+    const imageZoom = document.getElementById("imageZoom");
+    if (!imageZoom) return;
 
-    // Sélectionner les miniatures cliquables
+    // Sélectionner les images
+    const mainImg = imageZoom.querySelector("img");
     const thumbs = document.querySelectorAll(".fiche-thumb");
 
     // Remplacer l'image vue en gros quand on clique sur une miniature
     thumbs.forEach(thumb => {
         thumb.addEventListener("click", () => {
-            mainImg.src = thumb.dataset.full;
+            const newSrc = thumb.dataset.full;
+
+            // Changer l'image invisible
+            mainImg.src = newSrc;
+
+            // Changer l'image utilisée pour le zoom
+            imageZoom.style.setProperty(
+                "--url", `url('${newSrc}')`
+            );
         });
     });
 });

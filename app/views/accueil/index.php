@@ -58,4 +58,38 @@
     </div>
 </section>
 
+{% if encheresActives is not empty %}
+<section class="section">
+    <div class="container">
+        <h2 class="section__title">Enchères en cours</h2>
+
+        <div class="enchere-grid">
+            {% for e in encheresActives %}
+                <article class="enchere-card">
+
+                    {% if e.image_principale %}
+                        <div class="enchere-card__image">
+                            <img src="{{ base }}/img/{{ e.image_principale }}" alt="{{ e.timbre_nom }}">
+                        </div>
+                    {% endif %}
+
+                    <div class="enchere-card__body">
+                        <h3 class="enchere-card__title">{{ e.timbre_nom }}</h3>
+                        <p><strong>Prix plancher :</strong> {{ e.prix_plancher }}$</p>
+                        <p><strong>Fermeture :</strong> {{ e.date_fermeture | date("d/m/Y") }}</p>
+
+                        <a href="{{ base }}/encheres/fiche?id={{ e.idenchere }}"
+                           class="btn-primary enchere-card__btn">
+                            Voir détails
+                        </a>
+                    </div>
+
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
 {% include 'layouts/footer.php' %}

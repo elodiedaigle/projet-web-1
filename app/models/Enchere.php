@@ -29,12 +29,9 @@ class Enchere extends CRUD {
                     i.url AS image_principale
 
                 FROM enchere e
-                INNER JOIN timbre t 
-                    ON t.idtimbre = e.timbre_idtimbre
+                INNER JOIN timbre t ON t.idtimbre = e.timbre_idtimbre
 
-                LEFT JOIN timbre_image i 
-                    ON i.timbre_idtimbre = t.idtimbre
-                    AND i.type_image = 'principale'
+                LEFT JOIN timbre_image i ON i.timbre_idtimbre = t.idtimbre AND i.type_image = 'principale'
 
                 WHERE e.date_fermeture > NOW()
                 ORDER BY e.date_fermeture ASC";
@@ -104,13 +101,32 @@ class Enchere extends CRUD {
     }
 
     /* 
+    ====================================================
+    GET COULEURS : Récupérer toutes les images d'un timbre
+    ====================================================
+    */
+
+    public function getCouleurs($timbreId) {
+    $sql = "SELECT c.nom
+            FROM couleur c
+            INNER JOIN timbre_has_couleur thc 
+                ON thc.Couleur_idCouleur = c.idCouleur
+            WHERE thc.timbre_idtimbre = ?";
+
+    $stmt = $this->prepare($sql);
+    $stmt->execute([$timbreId]);
+
+    return $stmt->fetchAll();
+}
+
+    /* 
     ===================================================================================
     GET ACTIVES FILTRES : Récupérer les enchères actives selon les filtres sélectionnés
     ===================================================================================
     */
 
     public function getActivesFiltres($filtres = []){
-        $sql = "SELECT 
+        $sql = "SELECT DISTINCT
                     e.idenchere,
                     e.date_ouverture,
                     e.date_fermeture,
@@ -123,10 +139,11 @@ class Enchere extends CRUD {
                     i.url AS image_principale
                 FROM enchere e
                 INNER JOIN timbre t ON t.idtimbre = e.timbre_idtimbre
-                LEFT JOIN timbre_image i 
-                    ON i.timbre_idtimbre = t.idtimbre AND i.type_image = 'principale'
+                LEFT JOIN timbre_image i ON i.timbre_idtimbre = t.idtimbre AND i.type_image = 'principale'
                 LEFT JOIN pays p ON p.idPays = t.Pays_idPays
                 LEFT JOIN timbre_condition tc ON tc.idTimbreCondition = t.timbre_condition_idTimbreCondition
+                LEFT JOIN timbre_has_couleur thc ON thc.timbre_idtimbre = t.idtimbre
+                LEFT JOIN couleur c ON c.idCouleur = thc.Couleur_idCouleur
                 WHERE e.date_fermeture > NOW()";
 
         $params = [];
@@ -153,6 +170,12 @@ class Enchere extends CRUD {
         if ($filtres['certifie'] !== null && $filtres['certifie'] !== '') {
             $sql .= " AND t.certifie = ?";
             $params[] = $filtres['certifie'];
+        }
+
+        // Couleur
+        if (!empty($filtres['couleur'])) {
+            $sql .= " AND c.idCouleur = ?";
+            $params[] = $filtres['couleur'];
         }
 
         // Prix min
@@ -182,7 +205,7 @@ class Enchere extends CRUD {
     */
 
     public function getArchiveesFiltres($filtres = []){
-        $sql = "SELECT 
+        $sql = "SELECT DISTINCT
                     e.idenchere,
                     e.date_ouverture,
                     e.date_fermeture,
@@ -195,12 +218,11 @@ class Enchere extends CRUD {
                     i.url AS image_principale
                 FROM enchere e
                 INNER JOIN timbre t ON t.idtimbre = e.timbre_idtimbre
-                LEFT JOIN timbre_image i 
-                    ON i.timbre_idtimbre = t.idtimbre 
-                    AND i.type_image = 'principale'
+                LEFT JOIN timbre_image i ON i.timbre_idtimbre = t.idtimbre AND i.type_image = 'principale'
                 LEFT JOIN pays p ON p.idPays = t.Pays_idPays
-                LEFT JOIN timbre_condition tc 
-                    ON tc.idTimbreCondition = t.timbre_condition_idTimbreCondition
+                LEFT JOIN timbre_condition tc ON tc.idTimbreCondition = t.timbre_condition_idTimbreCondition
+                LEFT JOIN timbre_has_couleur thc ON thc.timbre_idtimbre = t.idtimbre
+                LEFT JOIN couleur c ON c.idCouleur = thc.Couleur_idCouleur
                 WHERE e.date_fermeture < NOW()";
 
         $params = [];
@@ -227,6 +249,12 @@ class Enchere extends CRUD {
         if ($filtres['certifie'] !== null && $filtres['certifie'] !== '') {
             $sql .= " AND t.certifie = ?";
             $params[] = $filtres['certifie'];
+        }
+
+        // Couleur
+        if (!empty($filtres['couleur'])) {
+            $sql .= " AND c.idCouleur = ?";
+            $params[] = $filtres['couleur'];
         }
 
         // Prix min

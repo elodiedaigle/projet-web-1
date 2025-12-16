@@ -12,6 +12,7 @@
     <script src="{{ base }}/js/validation-enchere-create.js" defer></script>
     <script src="{{ base }}/js/menu-burger.js" defer></script>
     <script src="{{ base }}/js/fiche-images.js" defer></script>
+    <script src="{{ base }}/js/image-zoom.js" defer></script>
 </head>
 <body>
 

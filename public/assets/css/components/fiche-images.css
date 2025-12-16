@@ -1,0 +1,42 @@
+/* ==============================================
+FICHE — Image
+============================================== */
+
+.fiche-image {
+    width: 100%;
+    max-width: 350px;
+    height: 350px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+}
+
+/* ==============================================
+FICHE — Image zoom
+============================================== */
+
+.fiche-image-zoom {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: 350px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: zoom-in;
+    --zoom-x: 50%;
+    --zoom-y: 50%;
+    --display: none;
+}
+
+.fiche-image-zoom::after {
+    content: '';
+    display: var(--display);
+    position: absolute;
+    inset: 0;
+    background-image: var(--url);
+    background-size: 200%;
+    background-position: var(--zoom-x) var(--zoom-y);
+    background-repeat: no-repeat;
+}

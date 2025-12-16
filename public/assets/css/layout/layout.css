@@ -243,16 +243,6 @@ FICHE DÉTAIL — BOITE GAUCHE
   color: var(--rouge-fonce);
 }
 
-.fiche-image {
-  width: 100%;
-  max-width: 350px;
-  height: 350px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-  border-radius: 12px;
-}
-
 .fiche-thumbs {
   display: flex;
   gap: 10px;
